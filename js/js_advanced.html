@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>高级JavaScript实例</title>
+    <script type="text/javascript">
+        var x = navigator;
+        document.write("CodeName=" + x.appCodeName);
+        document.write("<br />");
+        document.write("Name=" + x.appName);
+        document.write("<br />");
+        document.write("Version=" + x.appVersion);
+        document.write("<br />");
+        document.write("CookieEnabled=" + x.cookieEnabled);
+        document.write("<br />");
+        document.write("OnLine=" + x.onLine);
+        document.write("<br />");
+        document.write("Platform=" + x.platform);
+        document.write("<br />");
+        document.write("UA=" + x.userAgent);
+        document.write("<br />");
+        document.write("language=" + x.language);
+
+        function getCookie(c_name) {
+            if (document.cookie.length > 0) {
+                c_start = document.cookie.indexOf(c_name + "=")
+                if (c_start != -1) {
+                    c_start = c_start + c_name.length + 1;
+                    c_end = document.cookie.indexOf(";", c_start);
+                }
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document 对象</title>
+</head>
+<body>
+<a name="first">第一个锚</a><br/>
+
+<form name="Form1"></form>
+<form name="Form2"></form>
+<form name="Form3"></form>
+
+<script type="text/javascript">
+    document.write(document.title + "<br/>")
+    document.write(document.URL + "<br/>")
+    document.write(document.referrer + "<br/>")
+    document.write(document.domain + "<br/>")
+    document.write("返回中锚的数目" + document.anchors.length + "<br/>")
+    document.write("文档包含： " + document.forms.length + " 个表单。" + "<br/>")
+
+
+    function createNewDoc() {
+        var newDoc = document.open("text/html", "replace");
+        var txt = "<html><body>学习 DOM 非常有趣！</body></html>";
+        newDoc.write(txt);
+        newDoc.close();
+    }
+
+</script>
+
+<input type="button" value="打开并写入一个新文档" onclick="createNewDoc()">
+
+</body>
+</html>
