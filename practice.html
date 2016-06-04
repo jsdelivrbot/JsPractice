@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    //P111
+    function add1(num) {
+        return num + 100;
+    }
+
+    //    alert(add2(2));
+    add2 = function (num) {
+        return num + 1;
+    }
+
+
+    var add2 = function (num) {
+        return num + 2;
+    }
+
+
+    var result = add1(1);
+    var result2 = add2(1);
+    document.write(result + "\n");
+    document.write(result2);
+
+    //P112
+    function callSomeFunction(someFunction, someArgument) {
+        return someFunction(someArgument);
+    }
+
+    function add10(num) {
+        return num + 10;
+
+    }
+
+    var result4 = callSomeFunction(add10, 10);
+    //    alert(result4);
+    function getGreeting(name) {
+
+        return "Hello" + name;
+    }
+
+    var result3 = callSomeFunction(getGreeting, "GGG");
+    //    alert(result3);
+
+    //P114
+    function fac(num) {
+        if (num <= 1) {
+            return 1;
+        } else {
+            return num + arguments.callee(num - 1);
+        }
+    }
+
+    //    alert(fac(10));
+
+    //P118
+    var s1 = "some text";
+    var s2 = s1.substring(3);
+    s2.color = "red";
+    //    alert(s2.color);//undefined
+    document.write(s1 + "\n");
+    document.write(s2 + "\n");
+
+
+    //P139
+    var person = new Object();
+    person.a = 1;
+    person.b = "2";
+    person.c = "c";
+
+    document.write(person);
+
+    var person1 = {};
+    var person2 = {};
+
+    Object.defineProperty(person1, "name", {
+        writable: true,
+        value: "X"
+    });
+
+    //    alert(person1.name);
+    person1.name = "Y";
+    //    alert(person1.name);
+
+    Object.defineProperty(person2, "name", {
+        configurable: false,
+        value: "X"
+    });
+
+    //    Object.defineProperty(person2, "name", {
+    //        configurable: true,
+    //        value: "X"
+    //    });
+
+    var descriptor = Object.getOwnPropertyDescriptor(person2, "name");
+    //    alert(descriptor.value);
+    //    alert(descriptor.configurable);
+
+    function Person(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.sayName = function () {
+            alert(this.name);
+        }
+    }
+
+    var p1 = new Person("A", 28, "X");
+    var p2 = new Person("B", 27, "Y");
+    //    alert(p1.constructor == Person);
+    //    alertObj(p1);
+
+    function alertObj(obj) {
+        var output = "";
+        for (var i in obj) {
+            var property = obj[i];
+            output += i + " = " + property + "\n";
+        }
+        alert(output);
+    }
+
+    Person("C", 11, "Z");
+    //    window.sayName();
+
+    function People() {
+
+    }
+
+    People.prototype.name = "XP";
+    People.prototype.age = 12;
+    People.prototype.job = "Android";
+    People.prototype.sayName = function () {
+        alert(this.job);
+    }
+
+    var people1 = new People();
+    people1.job = "iOS";
+    delete people1.job;// delete 删除实例属性，从而重新访问原型中的属性
+    //    people1.sayName();
+    var people2 = new People();
+    //    people2.sayName();
+    //    alert(people1.sayName == people2.sayName);
+    //    alert(people1.hasOwnProperty("job"))
+
+    //P154
+    var keys = Object.keys(People.prototype);
+    //    alert(keys);
+
+    var pa = new People();
+    pa.name = "Rob";
+    pa.age = 31;
+    var pakeys = Object.keys(pa);
+    //    alert(pakeys);
+
+    //P153
+    var o = {
+        sample: function () {
+            return "My Object";
+        }
+    };
+
+    for (var prop in o) {
+        if (prop == "sample") {
+//            alert("Found It");
+        }
+    }
+
+    //P156
+    function Person1() {
+
+    }
+
+    var friend = new Person1();
+    Person1.prototype = {
+        constructor: Person1,
+        name: "XP",
+        age: 1,
+        job: "JavaScript",
+        sayName: function () {
+            alert(this.name);
+        }
+    };
+    //    friend.sayName();//error
+
+    //159
+    function Person2(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.friends = ["She", "Her"];
+    }
+
+    Person2.prototype = {
+        constructor: Person2,
+        sayName: function () {
+            alert(this.name);
+        }
+    }
+
+    var person21 = new Person2("He", 12, "Html");
+    var person22 = new Person2("Him", 12, "CSS");
+
+    person21.friends.push("Van");
+    //    alert(person21.friends)
+    //    alert(person22.friends)
+    //    alert(person21.friends == person22.friends)
+    //    alert(person21.sayName == person22.sayName)
+
+    //P162 继承，原型链
+    function SuperType() {
+        this.property = true;
+    }
+
+    SuperType.prototype.getSuperValue = function () {
+        return this.property;
+    };
+
+    function SubType() {
+        this.subproperty = false;
+    }
+
+    SubType.prototype = new SuperType();
+    SubType.prototype.getSubValue = function () {
+        return this.subproperty;
+    };
+
+    var instance = new SubType();
+    alert(instance.getSuperValue());
+
+</script>
+</body>
+</html>

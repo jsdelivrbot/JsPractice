@@ -1,0 +1,35 @@
+<!--http://www.w3school.com.cn/js/js_popup.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript 消息框</title>
+</head>
+<body>
+<script type="text/javascript">
+    function disp_alert() {
+        alert("我是警告框")
+    }
+
+    function show_confirm() {
+        var r = confirm("Press a button!");
+        if (r) {
+            alert("OK")
+        } else {
+            alert("Cancel")
+        }
+    }
+    function disp_prompt() {
+        var name = prompt("请输入你的名字", "Bill Gates")
+        if (name != null && name != "") {
+            document.write("你好！" + name + " 今天过得怎么样？")
+        }
+    }
+
+</script>
+<input type="button" onclick="disp_alert()" value="显示警告框">
+<input type="button" onclick="show_confirm()" value="显示确认框">
+<input type="button" onclick="disp_prompt()" value="显示提示框">
+</body>
+
+</html>

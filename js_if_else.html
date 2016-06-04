@@ -1,0 +1,33 @@
+<!--http://www.w3school.com.cn/js/js_if_else.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript If...Else</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    var d = new Date()
+    var time = d.getHours()
+    if (time < 10) {
+        document.write("<b>Good morning</b>")
+    }
+    else if (time >= 10 && time < 16) {
+        document.write("<b>Good day</b>")
+    }
+    else {
+        document.write("<b>Hello World!</b>")
+    }
+
+    var r = Math.random()
+    if (r > 0.5) {
+        document.write("<a href='http://www.w3school.com.cn'>学习 Web 开发！</a>")
+    }
+    else {
+        document.write("<a href='http://www.microsoft.com'>访问微软！</a>")
+    }
+</script>
+
+</body>
+</html>
