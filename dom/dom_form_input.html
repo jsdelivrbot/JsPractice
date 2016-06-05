@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form和Input对象</title>
+</head>
+<script type="text/javascript">
+    function changeAction() {
+        var x = document.getElementById("myForm")
+        alert("Original action: " + x.action)
+        x.action = "dom_event.html"
+        alert("New Action: " + x.action)
+        x.submit()
+    }
+
+    function showMethod() {
+        var x = document.getElementById("myForm");
+        alert(x.method)
+        x.disabled = true;
+    }
+
+    function alertId() {
+        var txt = "Id: " + document.getElementById("myButton").id
+        txt = txt + ", type: " + document.getElementById("myButton").type
+        alert(txt)
+        document.getElementById("myButton").disabled = true
+    }
+
+    function validate() {
+        var at = document.getElementById("email").value.indexOf("@")
+        var age = document.getElementById("age").value
+        var fname = document.getElementById("fname").value
+        submitOK = "true"
+
+        if (fname.length > 10) {
+            alert("名字必须小于 10 个字符。")
+            submitOK = "false"
+        }
+        if (isNaN(age) || age < 1 || age > 100) {
+            alert("年龄必须是 1 与 100 之间的数字。")
+            submitOK = "false"
+        }
+        if (at == -1) {
+            alert("不是有效的电子邮件地址。")
+            submitOK = "false"
+        }
+        if (submitOK == "false") {
+            return false
+        }
+    }
+
+    function favBrowser() {
+        var myList = document.getElementById("myList")
+        document.getElementById("favorite").value
+                = myList.options[myList.selectedIndex].text
+    }
+
+    function checkLen(x, y) {
+        if (y.length == x.maxLength) {
+            var next = x.tabIndex
+            if (next < document.getElementById("myForm1").length) {
+                document.getElementById("myForm1").elements[next].focus();
+            }
+        }
+    }
+</script>
+<body>
+
+<form id="myForm" action="dom_anchor.html" method="post">
+    名称：<input type="text" value="米老鼠">
+    <input type="button" onclick="changeAction(),showMethod()"
+           value="改变 action 属性并提交表单">
+</form>
+
+<button id="myButton" onClick="alertId()">请点击我！</button>
+
+<form action="dom_anchor.html" onsubmit="return validate()">
+    名字（最多 10 个字符）：<input type="text" id="fname" size="20"><br/>
+    年龄（从 1 到 100）：<input type="text" id="age" size="20"><br/>
+    电子邮件：<input type="text" id="email" size="20"><br/>
+    <br/>
+    <input type="submit" value="提交">
+</form>
+
+<form>
+    请选择您喜欢的浏览器：
+    <select id="myList" onchange="favBrowser()">
+        <option>Internet Explorer</option>
+        <option>Netscape</option>
+        <option>Opera</option>
+    </select>
+
+    <p>您喜欢的浏览器是：<input type="text" id="favorite" size="20"></p>
+</form>
+
+<form id="myForm1">
+    <input size="3" tabindex="1" maxlength="3" onkeyup="checkLen(this,this.value)">
+    <input size="2" tabindex="2" maxlength="2" onkeyup="checkLen(this,this.value)">
+    <input size="3" tabindex="3" maxlength="3" onkeyup="checkLen(this,this.value)">
+</form>
+</body>
+</html>

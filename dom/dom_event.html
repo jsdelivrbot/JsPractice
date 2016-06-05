@@ -3,8 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Event 对象</title>
+    <script type="text/javascript">
+        function whichButton(event) {
+            var btnNum = event.button;
+            if (btnNum == 2) {
+                alert("右键")
+            } else if (btnNum == 0) {
+                alert("左键")
+            } else if (btnNum == 1) {
+                alert("中键")
+            } else {
+                alert(btnNum)
+            }
+        }
+
+        function show_coords(event) {
+            x = event.clientX
+            y = event.clientY
+            alert("x: " + x + " Y: " + y);
+
+            x = event.screenX
+            y = event.screenY
+            alert("screenX: " + x + " screenY: " + y)
+        }
+
+        function whichButton2(event) {
+            alert(event.keyCode);
+        }
+
+        function isKeyPressed(event) {
+            if (event.shiftKey) {
+                alert("The shift key was pressed!")
+            }
+            else {
+                alert("The shift key was NOT pressed!")
+            }
+        }
+
+        function whichElement(e) {
+            var target
+            if (!e)
+                e = window.event
+            if (e.target)
+                target = e.target
+            else if (e.srcElement)
+                target = e.srcElement
+            if (target.nodeType == 3) // defeat Safari bug
+                target = target.parentNode
+            alert("You clicked on a " + target.tagName + " element.")
+        }
+
+
+    </script>
 </head>
-<body>
+<body onmousedown="whichButton(event),show_coords(event),
+isKeyPressed(event),whichElement(event)"
+      onkeyup="whichButton2(event)">
+<p>请在文档中点击鼠标。一个消息框会提示出您点击了哪个鼠标按键。</p>
+
+<h3>这是标题</h3>
+
+<p>这是段落。</p>
 
 </body>
 </html>
