@@ -31,6 +31,24 @@
             }
         }
 
+        personObj = new Object()
+        personObj.firstname = "John"
+        personObj.lastname = "Adams"
+        personObj.age = 35
+        personObj.eyecolor = "black"
+
+        document.write("<br/>" + personObj.firstname + " 的年龄是 " + personObj.age + " 岁。")
+
+        function Person(firstname, lastname, age, eyecolor) {
+            this.firstname = firstname
+            this.lastname = lastname
+            this.age = age
+            this.eyecolor = eyecolor
+        }
+
+        myFather = new Person("John", "Adams", 35, "black")
+
+        document.write(myFather.firstname + " 的年龄是 " + myFather.age + " 岁。")
 
     </script>
 </head>

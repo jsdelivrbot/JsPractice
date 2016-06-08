@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Jquery</title>
+	<script type="text/javascript" src="jquery-2.2.4.js"></script>
+</head>
+<body>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$("h2").css("background-color","red");
+			$("button#button1").click(function () {
+				$("p").hide();
+			});
+			$("button#button2").click(function () {
+				$("#div1").fadeToggle();
+				$("#div2").fadeToggle("slow");
+				$("#div3").fadeToggle(3000);
+			});
+			$("button#button3").click(function () {
+			var div=$("div#animate");
+			div.animate({left:"100px"},"slow");
+			div.animate({fontSize:"3em"},"slow")
+			});
+			$("button#button4").click(function () {
+			$(".chaining").css("color","red").slideUp(200).slideDown(200);
+		
+			});
+			$(".flip").click(function(){
+				$(".panel").slideToggle("slow");
+			});
+		});
+
+
+	</script>
+
+	<style type="text/css">
+		div.panel,p.flip{
+			margin: 0px;
+			padding: 5px;
+			text-align: center;
+			background:#e5eecc;	
+			border: solid 1px #c3c3c3;
+		}
+		div.panel{
+			height: 120px;
+			display: none;
+		}
+	</style>
+
+	<h2>This is a heading</h2>
+
+	<p>This is a paragraph.</p>
+
+	<p>This is another paragraph.</p>
+	<button id="button1" type="button">Click me</button>
+	<button id="button2" type="button">Click me</button>
+	<button id="button3" type="button">animate</button>
+	<button id="button4" type="button">chaining</button>
+
+	<br>
+	<div style="height:80px;">
+		<div id="div1" style="width:80px;height:80px;background-color:red;"></div>
+	</div>
+	<br>
+	<div style="height:80px;">
+		<div id="div2" style="width:80px;height:80px;background-color:red;"></div>
+	</div>
+	<br>
+	<div style="height:80px;">
+		<div id="div3" style="width:80px;height:80px;background-color:red;"></div>
+	</div>
+
+
+
+	<div class="panel">
+		<p>WWW</p>
+		<p>XXX</p>
+	</div>
+
+	<p class="flip">click it</p>
+
+	<div id="animate" style="background: blue;height: 100px;width: 200px;">Hello</div>
+
+	<div class="chaining"> Chaining</div> 
+
+</body>
+</html>

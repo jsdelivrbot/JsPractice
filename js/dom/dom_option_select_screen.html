@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Option,Select,Screen对象</title>
+    <script type="text/javascript">
+        function disable() {
+            document.getElementById("mySelect").disabled = true;
+        }
+        function enable() {
+            document.getElementById("mySelect").disabled = false;
+        }
+
+        function alertIndex() {
+            var x = document.getElementById("mySelect").selectedIndex;
+            var y = document.getElementsByTagName("option");
+            alert(y[x].text + " has the index of: " + y[x].index);
+        }
+
+        function removeOption() {
+            var x = document.getElementById("mySelect")
+            x.remove(x.selectedIndex);
+        }
+        document.write(screen.width + " * " + screen.height);
+
+    </script>
+</head>
+<body>
+<form>
+    <select id="mySelect">
+        <option>apple1</option>
+        <option>apple2</option>
+        <option>apple3</option>
+    </select>
+    <input type="button" onclick="disable()" value="disable">
+    <input type="button" onclick="enable()" value="enable">
+    <input type="button" onclick="alertIndex()" value="alertIndex">
+    <input type="button" onclick="removeOption()" value="removeOption">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table,TableHeader,TableRow,TableData对象</title>
+</head>
+    <script type="text/javascript">
+    function changeBorder() {
+        document.getElementById("myTable").border = "10";
+    }
+
+    function cell() {
+        var x = document.getElementById("myTable").rows[0].cells;
+        alert(x[0].innerHTML);
+    }
+
+    function createCaption() {
+        var x = document.getElementById('myTable').createCaption()
+        x.innerHTML = "我的表格标题"
+    }
+
+
+    function insertRow() {
+        var x = document.getElementById("myTable").insertRow(0);
+        var y = x.insertCell(0);
+        var z = x.insertCell(1);
+        y.innerHTML = "cell1"
+        z.innerHTML = "cell2"
+    }
+
+</script>
+<body>
+    <table border="1" id="myTable">
+        <tr>
+            <td>100</td>
+            <td>200</td>
+        </tr>
+        <tr>
+            <td>300</td>
+            <td>400</td>
+        </tr>
+    </table>
+    <input type="button" onclick="changeBorder()" value="changeBorder">
+    <input type="button" onclick="cell()" value="cell">
+    <input type="button" onclick="createCaption()" value="createCaption">
+    <input type="button" onclick="insertRow()" value="insertRow"></body>
+</html>

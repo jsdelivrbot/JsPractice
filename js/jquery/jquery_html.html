@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-2.2.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                alert("Text: " + $("#test").text());
+            });
+            $("#btn2").click(function () {
+                alert("HTML: " + $("#test").html());
+            });
+            $("#btn3").click(function () {
+                alert("Value: " + $("#test3").val());
+                alert("attr: " + $("#test3").attr("value"));
+            });
+            $("p#append").append("append");
+            $("p#append").prepend("append");
+            $("#btn4").click(function () {
+                $("p#append").remove();
+            });
+            $("#btn5").click(function () {
+                $("p#append").addClass("blue");
+                $("p#test").addClass("important");
+            });
+            $("#btn6").click(function () {
+                $("#btn6").css({"background-color": "yellow", "font-size": "200%"});
+            });
+        });
+    </script>
+    <style type="text/css">
+        .important {
+            font-weight: bold;
+            font-size: xx-large;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+<p id="test">
+    这是段落中的 <b>粗体</b>文本。
+</p>
+
+<p>
+    姓名：
+    <input type="text" id="test3" value="米老鼠"></p>
+
+<p id="append">这是文本</p>
+<button id="btn1">显示文本</button>
+<button id="btn2">显示 HTML</button>
+<button id="btn3">显示值</button>
+<button id="btn4">删除元素</button>
+<button id="btn5">添加类</button>
+<button id="btn6">设置多个样式</button>
+</body>
+
+</html>

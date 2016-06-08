@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Window对象</title>
+</head>
+<script type="text/javascript">
+    function open_win() {
+        window.open("http://www.w3school.com.cn")
+    }
+
+    function scrollWindow() {
+        window.scrollBy(100, 100);
+    }
+
+    var c = 0;
+    var t;
+    function timeCount() {
+        document.getElementById("txt").value = c;
+        c = c + 1;
+        t = setTimeout("timeCount()", 1000)
+
+    }
+
+    function stopCount() {
+        clearTimeout(t);
+    }
+
+    function show_popup() {
+        var p = window.createPopup()
+        var pbody = p.document.body
+        pbody.style.backgroundColor = "red"
+        pbody.style.border = "solid black 1px"
+        pbody.innerHTML = "这是一个 pop-up！在 pop-up 外面点击，即可关闭它！"
+        p.show(150, 150, 200, 50, document.body)
+    }
+
+</script>
+<body>
+
+<input type="button" value="timedCount" onClick="timeCount()">
+<input type="text" id="txt">
+<input type="button" value="stopCount" onClick="stopCount()">
+<input type=button value="open_win" onclick="open_win()">
+<input type=button value="scrollWindow" onclick="scrollWindow()">
+<button onclick="show_popup()">显示 pop-up！</button>
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+<p>文本文本文本文本文本文本文本文本文本文本文本文本文本</p>
+
+
+</body>
+</html>
