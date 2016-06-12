@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+</head>
+<script>
+    var xmlhttp;
+    function loadDoc(url) {
+        xmlhttp = null;
+        if (window.XMLHttpRequest)
+            xmlhttp = new XMLHttpRequest();
+        else if (window.ActiveXObject) {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
+        }
+        if (xmlhttp != null) {
+            xmlhttp.onreadystatechange = stateChange;
+            xmlhttp.open("GET", url, true)
+            xmlhttp.send();
+        } else {
+            alert("not support xmlhttp")
+        }
+    }
+
+    function stateChange() {
+        if (xmlhttp.readyState == 4) {
+            if (xmlhttp.status == 200) {
+                document.getElementById("t1").innerHTML = xmlhttp.responseText
+            } else {
+                alert(xmlhttp.statusText)
+            }
+        }
+    }
+
+    function loadXmlDoc(url) {
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                txt = "<table border='1'><tr><th>Title</th><th>Artist</th></tr>";
+                tag = xmlhttp.responseXML.documentElement.getElementsByTagName("CD");
+                for (i = 0; i < tag.length; i++) {
+                    txt = txt + "<tr>";
+                    subtag = tag[i].getElementsByTagName("TITLE");
+                    txt = txt + "<td>" + subtag[0].firstChild.nodeValue + "</td>";
+                    subtag = tag[i].getElementsByTagName("ARTIST");
+                    txt = txt + "<td>" + subtag[0].firstChild.nodeValue + "</td>";
+                    txt = txt + "</tr>";
+                }
+                txt = txt + "</table>";
+                document.getElementById('t2').innerHTML = txt;
+            }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+</script>
+<body onload="loadDoc('a.txt')">
+<div id="t1" style="border: 1px solid black;height:40px;width:300px;padding:15px"></div>
+<br/>
+<button onclick="loadDoc('b.txt')">Click</button>
+<button onclick="loadXmlDoc('cd_catalog.xml')">获得CD信息</button>
+<div id="t2"></div>
+</body>
+</html>

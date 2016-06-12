@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery 遍历</title>
+    <script src="jquery-2.2.4.js"></script>
+    <script>
+    $(document).ready(function(){
+    	$("span").parents().css({"color":"red","border":"2px solid red"})
+    })
+    </script>
+</head>
+<body>
+
+<div class="ancestors">
+  <div style="width:500px;">div (曾祖父)
+    <ul>ul (祖父)  
+      <li>li (直接父)
+        <span>span</span>
+      </li>
+    </ul>   
+  </div>
+
+  <div style="width:500px;">div (祖父)   
+    <p>p (直接父)
+        <span>span</span>
+      </p> 
+  </div>
+</div>
+
+</body>
+</html>
