@@ -35,14 +35,14 @@
     function loadXmlDoc(url) {
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                txt = "<table border='1'><tr><th>Title</th><th>Artist</th></tr>";
-                tag = xmlhttp.responseXML.documentElement.getElementsByTagName("CD");
+                var txt = "<table border='1'><tr><th>Title</th><th>Artist</th></tr>";
+                var tag = xmlhttp.responseXML.documentElement.getElementsByTagName("CD");
                 for (i = 0; i < tag.length; i++) {
                     txt = txt + "<tr>";
-                    subtag = tag[i].getElementsByTagName("TITLE");
-                    txt = txt + "<td>" + subtag[0].firstChild.nodeValue + "</td>";
-                    subtag = tag[i].getElementsByTagName("ARTIST");
-                    txt = txt + "<td>" + subtag[0].firstChild.nodeValue + "</td>";
+                    var subTag = tag[i].getElementsByTagName("TITLE");
+                    txt = txt + "<td>" + subTag[0].firstChild.nodeValue + "</td>";
+                    subTag = tag[i].getElementsByTagName("ARTIST");
+                    txt = txt + "<td>" + subTag[0].firstChild.nodeValue + "</td>";
                     txt = txt + "</tr>";
                 }
                 txt = txt + "</table>";
@@ -52,6 +52,8 @@
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }
+
+    xmlhttp.load
 </script>
 <body onload="loadDoc('a.txt')">
 <div id="t1" style="border: 1px solid black;height:40px;width:300px;padding:15px"></div>

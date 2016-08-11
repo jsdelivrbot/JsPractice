@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>String 对象实例</title>
+</head>
+<body>
+<script>
+    var text = "Hello World!";
+    document.write(text.length);
+    document.write(text.big());
+    document.write(text.bold());
+    document.write(text.blink());
+    document.write(text.fixed());
+    document.write(text.fontcolor("red"));
+    document.write(text.sub());
+    document.write(text.sup());
+    document.write(text.indexOf("o W")+"<br/>");
+    document.write(text.match("o W")+"<br/>");
+    document.write(text.match("o w")+"<br/>");
+    document.write(text.replace("o W","oW")+"<br/>");
+    console.log(text.localeCompare("x"));
+    console.log(new String("x") instanceof String);
+    console.log(isString(text));
+
+    function isString(str){
+        return (typeof str=='string')&&str.constructor==String;
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date 对象实例</title>
+</head>
+<body>
+<script>
+    var data = new Date();
+    document.write(Date() + "<br/>");
+    document.write(data.getTime() + "<br/>");
+    data.setFullYear(1993, 9, 8);
+    document.write(data + "<br/>");
+    document.write(data.getDay() + "<br/>");
+    setTime();
+    function setTime() {
+        var data = new Date();
+        document.getElementById("txt").innerHTML = data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds();
+        setTimeout('setTime()', 500);
+    }
+</script>
+<div id="txt"></div>
+
+</body>
+</html>

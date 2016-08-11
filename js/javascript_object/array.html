@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array 对象实例</title>
+</head>
+<body>
+<script>
+    var mycars = new Array();
+    mycars[0] = "A";
+    mycars[1] = "B";
+    mycars[2] = "C";
+    var arr = new Array(1, 2, 3, 2);
+    for (i = 0; i < mycars.length; i++) {
+        document.write(mycars[i] + "<br/>");
+    }
+
+    for (x in mycars) {
+        document.write(mycars[x] + "<br/>");
+    }
+
+    document.write(arr.concat(mycars));
+    document.write(arr.join());
+    document.write(arr.join(":") + "<br/>");
+    document.write(arr.sort().reverse());
+
+</script>
+</body>
+</html>
