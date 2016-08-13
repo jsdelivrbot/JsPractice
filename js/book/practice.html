@@ -232,6 +232,48 @@
     var instance = new SubType();
     alert(instance.getSuperValue());
 
+    //P175
+    //函数声明提升 function declaration hoisting
+    sayHi();
+    function sayHi() {
+        alert("Hi!");
+    }
+    alert(sayHi.name);//访问到函数指定的名字，永远等于function关键字后面的标识符
+
+    //函数表达式
+    //    sayHi2();//函数不存在
+    //    var sayHi2 = function () {
+    //        alert("Hi2!");
+    //    }
+
+    //DON'T DO LIKE THIS!
+    var condition = true;
+    if (condition) {
+        function sayHi3() {
+            alert("Hi3!");
+        }
+    } else {
+        function sayYo3() {
+            alert("Yo3!");
+        }
+    }
+    //DO LIKE THIS
+    var sayYo;
+    if (condition) {
+        sayYo = function () {
+            alert("sayYo!");
+        }
+    } else {
+        sayYo = function () {
+            alert("sayYo2!");
+        }
+    }
+
+    console.log(sayYo);
+    document.write(sayYo);
+    console.log(sayYo());
+
+
 </script>
 </body>
 </html>

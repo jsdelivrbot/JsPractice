@@ -3,17 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script >
-        for(var i=0;i<3;++i)
-        {
-            setTimeout(function(){
-                console.log(i);
-            },0)
+    <script>
+        //P193
+        var age = 29;
+        function sayAge() {
+//            alert(this.age);
         }
+        //        alert(window.age);
+        sayAge();
+        window.sayAge();
+
+        //全局变量不能通过delete删除（Configurable为false），在window对象上定义的属性可以
+        window.color = "red";
+        delete window.age;
+        delete window.color;
+        //        alert(window.age);//29
+        //        alert(window.color);//undefined
+
+        //P197
+        var leftPos = (typeof window.screenLeft == "number") ? window.screenLeft : window.screenX;
+        var topPos = (typeof window.screenTop == "number") ? window.screenTop : window.screenY;
+        console.log(leftPos);
+        console.log(topPos);
+
+        //P200
+
+        var wroxWin = window.open("http://www.baidu.com/", "topFrame");
+        if (wroxWin == null) {
+//            alert("The popup was blocked!");
+        }
+        //函数与其他数据类型一样，处于平等地位，可以赋值给其他变量，
+        //也可以作为参数，传入另一个函数，或者作为别的函数的返回值
+        var print = function (i) {
+            console.log(i);
+        };
+        [1, 2, 3].forEach(print);
+
+        //P203
+        //超时调用
+        //不建议传递字符串
+        //        setTimeout("alert('Hello World')", 1000);
+        //推荐
+        var t = setTimeout(function () {
+            alert("Hello World!");
+        }, 2000);
+        clearTimeout(t);
+
+        //间歇调用
+        var i = 1;
+        setInterval(function () {
+            console.log(i++);
+        }, 1000);
+
+        //        confirm("Are you sure?");
+        //        prompt("xxx", "input");
+        window.print();
+        window.find();
+
+        //location对象
+        //使用replace(),用户不能后退
+        location.replace("http://bing.com");
+
 
     </script>
 </head>
-<body>
 
-</body>
+<!--<body>-->
+<frameset rows="160,*">
+    <!--<frame src="practice.html" name="topFrame">-->
+    <frameset cols="50%,50%">
+        <!--<frame src="practice.html" name="leftFrame">-->
+        <!--<frame src="practice.html" name="rightFrame">-->
+    </frameset>
+</frameset>
+
+<!--</body>-->
 </html>
