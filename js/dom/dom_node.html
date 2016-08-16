@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+    //元素节点
+    function showElement() {
+        var element = document.getElementById("h1"); 
+        //h1是一个<h1>标签  
+        alert('nodetype:' + element.nodeType); 
+        //nodeType=1  元素
+        alert('nodeName:' + element.nodeName);
+        //H1
+        alert('nodeValue:' + element.nodeValue); 
+        //null  
+        alert('element:' + element);
+    }
+
+    //文本节点
+    function showText() {
+        var element = document.getElementById("h1");
+        var text = element.childNodes[0];
+        alert('nodeType:' + text.nodeType); 
+        //nodeType=3 文本
+        alert('nodeValue:' + text.nodeValue); 
+        //文本节点的nodeValue是文本本身  
+        text.nodeValue = text.nodeValue + "abc"; 
+        //文本内容添加修改删除等等
+        alert('nodeName:' + text.nodeName);
+        //文本节点的 nodeName 始终是 #text
+        alert(text.data); 
+        //data同样是其内容,这个属性下同样可以增删改。  
+    }
+
+    //文档节点
+    function showDocument() {
+        alert('nodeType:' + document.nodeType); 
+        //nodeType=9 文档  
+        alert('nodeName:' + document.nodeName);
+        //文档节点的 nodeName 始终是 #document
+        alert(document);
+    }
+
+    //属性节点
+    function showAttr() {
+        var btnShowAttr = document.getElementById("btnShowAttr"); // 演示按钮，有很多属性  
+        var attrs = btnShowAttr.attributes;
+        for (var i = 0; i < attrs.length; i++) {
+            var attr = attrs[i];
+            alert('nodeType:' + attr.nodeType); 
+            //attribute 的nodeType=2  
+            alert('attr:' + attr);
+            alert('attr.name:' + attr.name + '=' + attr.value);
+        }
+    }
+
+    function demo() {
+        var btnDemo1 = document.getElementById("btnDemo1");
+        btnDemo1.onclick = showElement; 
+        var btnDemo2 = document.getElementById("btnDemo2");
+        btnDemo2.onclick = showText;
+        var btnDemo3 = document.getElementById("btnDemo3");
+        btnDemo3.onclick = showDocument;
+        var btnShowAttr = document.getElementById("btnShowAttr");
+        btnShowAttr.onclick = showAttr;
+    }
+    window.onload = demo;
+    </script>
+</head>
+
+<body>
+    <h1 id="h1">An HTML Document</h1>
+    <p id="p1">This is a <i>W3C HTML DOM</i> document.</p>
+    <p>
+        <input id="btnDemo1" type="button" value="取H1 Element节点值">
+    </p>
+    <p>
+        <input id="btnDemo2" type="button" value="取H1 Element节点文本">
+    </p>
+    <p>
+        <input id="btnDemo3" type="button" value="取Document Element节点文本">
+    </p>
+    <p>
+        <input type="button" alt="这是个演示按钮" title="演示按钮提示标题" name="btnShowAttr" id="btnShowAttr" value="按钮节点演示" />
+    </p>
+</body>
+
+</html>
