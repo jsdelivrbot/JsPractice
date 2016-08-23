@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .clearfix {
+            *zoom: 1
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #header {
+            width: 600px;
+            height: 90px;
+            margin: 0 auto;
+            background: #7deeff;
+        }
+
+        #body {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+
+        #aside {
+            float: left;
+            width: 100px;
+            height: 500px;
+            background: #ccc;
+        }
+
+        #main {
+            float: left;
+            width: 500px;
+            height: 500px;
+            background: orange;
+        }
+
+        #footer {
+            width: 600px;
+            height: 90px;
+            margin: 0 auto;
+            background: #08f;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">header</div>
+    <div id="body" class="clearfix">
+        <div id="aside">aside</div>
+        <div id="main">main</div>
+
+    </div>
+    <div id="footer">footer</div>
+</div>
+
+</body>
+</html>

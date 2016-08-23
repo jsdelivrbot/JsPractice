@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>中间固定宽度，两边自适应宽度</title>
+    <style type="text/css">
+        #left,
+        #right {
+            float: left;
+            margin: 0 0 0 -271px;
+            width: 50%;
+            *width: 49.9%;
+
+        }
+
+        #main {
+            width: 540px;
+            float: left;
+            background: green;
+        }
+
+        .inner {
+            padding: 20px;
+        }
+
+        #left .inner,
+        #right .inner {
+            margin: 0 0 0 271px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+<div id="left">
+    <div class="inner">this is left sidebar content</div>
+</div>
+<div id="main">
+    <div class="inner">this is main content</div>
+</div>
+<div id="right">
+    <div class="inner">this is right siderbar content</div>
+</div>
+</body>
+</html>

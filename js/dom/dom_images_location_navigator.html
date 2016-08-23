@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Image,Location,Navigator</title>
     <script type="text/javascript">
-        function changeSize() {
-            document.getElementById("compman").height = "270"
-            document.getElementById("compman").width = "164"
-        }
+    function changeSize() {
+        document.getElementById("compman").height = "270"
+        document.getElementById("compman").width = "164"
+    }
 
-        function curLocation() {
-            alert(window.location)
-        }
+    function curLocation() {
+        alert(window.location)
+    }
 
-        function newLocation() {
-            window.location = "dom_anchor.html"
-        }
-
+    function newLocation() {
+        window.location = "dom_anchor.html"
+    }
     </script>
 </head>
+
 <body>
-<img id="compman" src="http://localhost:63342/JsPractice/images/eg_bulbon.gif"/>
-<br/><br/>
-<input type="button" onclick="changeSize()" value="改变图像的高度和宽度">
-
-<input type="button" onclick="curLocation()" value="显示当前的 URL">
-<input type="button" onclick="newLocation()" value="改变 URL">
-
+    <img id="compman" src="http://localhost:63342/JsPractice/images/eg_bulbon.gif" />
+    <br/>
+    <br/>
+    <input type="button" onclick="changeSize()" value="改变图像的高度和宽度">
+    <input type="button" onclick="curLocation()" value="显示当前的 URL">
+    <input type="button" onclick="newLocation()" value="改变 URL">
 </body>
+
 </html>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajax</title>
+    <script type="text/javascript" src="jquery-2.2.4.js"></script>
 </head>
 <script>
     var xmlhttp;
@@ -53,7 +54,19 @@
         xmlhttp.send();
     }
 
-    xmlhttp.load
+    $(document).ready(function () {
+        $("#txt1").keyup(function () {
+            $.ajax({
+                url: "http://www.w3school.com.cn/ajax/gethint.asp?q=a",
+                type: 'GET',
+                dataType: 'JSONP',
+                success: function (data) {
+
+                }
+            });
+        });
+    });
+
 </script>
 <body onload="loadDoc('a.txt')">
 <div id="t1" style="border: 1px solid black;height:40px;width:300px;padding:15px"></div>
@@ -61,5 +74,7 @@
 <button onclick="loadDoc('b.txt')">Click</button>
 <button onclick="loadXmlDoc('cd_catalog.xml')">获得CD信息</button>
 <div id="t2"></div>
+<input type="text" id="txt1">
+<form><p>Suggestion:<span id="txtHint"></span></p></form>
 </body>
 </html>
