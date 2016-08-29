@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+</head>
+
+<body>
+<!--rect-->
+<canvas id="canvas-rect" width="200" height="100"></canvas>
+<!--coordinates-->
+<div class="border" id="coordiv" onmousemove="getCoordinates(event)" onmouseout="clearCoordinates()"></div>
+<div id="xy-coordinates">x: y:</div>
+<!--line-->
+<canvas class="border" id="canvas-line"></canvas>
+<!--circle-->
+<canvas class="border" id="canvas-circle"></canvas>
+<!--gradient-->
+<canvas class="border" id="canvas-gradient"></canvas>
+<!--image-->
+<canvas class="border" id="canvas-image"></canvas>
+
+</body>
+
+<style>
+    .border {
+        display: block;
+        margin-top: 10px;
+        width: 200px;
+        height: 100px;
+        border: 1px solid #c3c3c3;
+    }
+
+</style>
+<script src="js/main.js"></script>
+
+</html>
