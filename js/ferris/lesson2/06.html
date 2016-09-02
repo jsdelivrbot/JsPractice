@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片列表:鼠标移入/移出改变图片透明度</title>
+    <style>
+        ul li {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #img-list {
+            width: 700px;
+            overflow: hidden;
+            zoom: 1;
+            border: 1px solid #333;
+            margin: 0 auto;
+            padding: 0 0 10px 10px;
+        }
+
+        #img-list li {
+            float: left;
+            width: 128px;
+            height: 128px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            margin: 10px 10px 0 0;
+        }
+
+        #img-list li img {
+            left: 50%;
+            top: 50%;
+            height: 100%;
+            width: auto;
+            position: absolute;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+
+            opacity: 0.3;
+            cursor: crosshair;
+            filter: alpha(opacity=30);
+        }
+
+
+        #img-list li.current img {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            var oLi = document.getElementsByTagName("li");
+            for (var i = 0; i < oLi.length; i++) {
+                oLi[i].onmouseover = function () {
+                    this.className = "current";
+                }
+                oLi[i].onmouseout = function () {
+                    this.className = "";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+<ul id="img-list">
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-8.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-7.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-6.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-5.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-18.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-17.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-16.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-15.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-14.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-13.jpg"></li>
+    <li><img src="http://7xq3d5.com1.z0.glb.clouddn.com/wall-12.jpg"></li>
+</ul>
+
+</body>
+</html>

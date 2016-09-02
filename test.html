@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var a=10;
+    function fn(){
+        console.log(a);
+    }
+
+    function bar(f){
+        var a=20;
+        f();
+    }
+    bar(fn);
+
+
+</script>
+</body>
+</html>
