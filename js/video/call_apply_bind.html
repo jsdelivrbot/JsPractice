@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //call apply 仅接受参数不同
+    function fruits() {
+    }
+
+    fruits.prototype = {
+        color: "red",
+        say: function () {
+            console.log("My color is " + this.color);
+        }
+    }
+
+    var apple = new fruits;
+    apple.say();    //My color is red
+
+    banana = {
+        color: "yellow"
+    }
+    apple.say.call(banana);     //My color is yellow
+    apple.say.apply(banana);    //My color is yellow
+
+    //bind
+    var foo = {
+        getAsyncData: function (cb) {
+            cb();
+        },
+        bar: 1,
+
+        e: function () {
+            this.getAsyncData(function () {
+                console.log(this.bar);
+            });
+        }
+    }
+
+    foo.e();
+
+    var foo2 = {
+        getAsyncData: function (cb) {
+            cb();
+        },
+        bar: 1,
+
+        e: function () {
+            var that = this;
+            this.getAsyncData(function () {
+                console.log(that.bar);
+            });
+        }
+    }
+
+    foo2.e();
+
+    var foo3 = {
+        getAsyncData: function (cb) {
+            cb();
+        },
+        bar: 1,
+
+        e: function () {
+            this.getAsyncData(function () {
+                console.log(this.bar);
+            }.bind(this));
+        }
+    }
+
+    foo3.e();
+
+    //arguments
+    function xxx(x, y, z) {
+        console.log("xxx " + arguments.length);
+        console.log("xxx " + arguments.callee.length);
+    }
+
+    xxx(1);
+
+
+</script>
+</body>
+</html>

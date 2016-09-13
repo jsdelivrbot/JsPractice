@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    var foo = ( function () {
+        var secret = 'secret';
+// “闭包”内的函数可以访问 secret 变量，而 secret 变量对于外部却是隐藏的
+        return {
+            get_secret: function () {
+// 通过定义的接口来访问 secret
+                return secret;
+            },
+            new_secret: function (new_secret) {
+// 通过定义的接口来修改 secret
+                secret = new_secret;
+            }
+        };
+    }() );
+
+    foo.get_secret(); // 得到 'secret'
+    foo.secret; // Type error，访问不能
+    foo.new_secret('a new secret'); // 通过函数接口，我们访问并修改了 secret 变量
+    foo.get_secret(); // 得到 'a new secret'
+
+
+</script>
+</body>
+</html>

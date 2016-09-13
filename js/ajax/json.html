@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON</title>
+    <script type="text/javascript" src="jquery-3.1.0.js"></script>
+
+</head>
+<body>
+<p id="demo"></p>
+<script>
+
+    var p = document.createElement("p");
+
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://localhost:8002/listUsers',
+            method: 'GET',
+            success: function (data) {
+                p.innerHTML = JSON.stringify(data);
+                document.body.appendChild(p);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

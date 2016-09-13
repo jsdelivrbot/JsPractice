@@ -6,16 +6,13 @@
 </head>
 <body>
 <script>
-    var a=10;
-    function fn(){
-        console.log(a);
-    }
 
-    function bar(f){
-        var a=20;
-        f();
+    var a = 1
+
+    var b = function () {
+        return 1 + a
     }
-    bar(fn);
+    b();
 
 
 </script>

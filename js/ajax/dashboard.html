@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <script type="text/javascript" src="jquery-3.1.0.js"></script>
+    <script type="text/javascript" src="echarts.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            border: none;
+            text-align: center;
+            padding: 12px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+    </style>
+</head>
+<body>
+<!--<p id="demo"></p>-->
+<body>
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: auto;height:500px;"></div>
+</body>
+<script>
+    var _table_ = document.createElement('table'),//表格
+            _tr_ = document.createElement('tr'),//行
+            _th_ = document.createElement('th'),//头
+            _td_ = document.createElement('td');//单元
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://v2.taidii.com/api/cndashboard/',
+            headers: {
+                'Authorization': '3b8c568f-732d-11e6-8249-9801a7aad89d',
+            },
+            method: 'GET',
+            success: function (data) {
+                var arr = data.results;
+
+                // 所有类别
+                var categorySet = [];
+                for (let i = 0; i < arr.length; i++) {
+                    for (let key in arr[i]) {
+                        if (arr[i].hasOwnProperty(key) && categorySet.indexOf(key) === -1 && key !== "id") {
+                            categorySet.push(key);
+                        }
+                    }
+                }
+
+                //数据的二维数组
+                var d2Array = [];
+                for (let i = 0; i < categorySet.length; i++) {
+                    var array = [];
+                    for (let j = 0; j < arr.length; j++) {
+                        var value = arr[j][categorySet[i]];// arr[0][name]第一个学校的名字
+                        array.push(value || (value == 0 ? '0' : ''));
+                    }
+                    d2Array.push(array);
+                }
+
+                var d2ArrayShow = [];
+                for (let i = 0; i < categorySet.length; i++) {
+                    if (categorySet[i] !== 'name' && categorySet[i] !== 'date') {
+                        d2ArrayShow.push({
+                            name: categorySet[i],
+                            type: 'bar',
+                            data: d2Array[i]
+                        });
+                    }
+                }
+
+                var categorySetShow = [];
+                for (let i = 0; i < categorySet.length; i++) {
+                    if (categorySet[i] !== 'name' && categorySet[i] !== 'date') {
+                        categorySetShow.push(categorySet[i]);
+                    }
+                }
+
+                console.log(d2ArrayShow);
+                // 指定图表的配置项和数据
+                var option = {
+                            title: {
+                                text: 'TaidiiCN Dashboard'
+                            },
+                            tooltip: {},
+                            grid: {
+                                bottom: '18%'
+                            },
+                            // 图例
+                            legend: {
+                                data: categorySetShow,
+                                selectedMode: 'single',
+                                formatter: function (name) {
+                                    var returnName;
+                                    if (name === "photocount") {
+                                        returnName = "照片数量";
+                                    } else if (name === "attendancecount") {
+                                        returnName = "考勤数量";
+                                    } else if (name === "studentcount") {
+                                        returnName = "学生人数";
+                                    }
+                                    return returnName;
+                                }
+                            }
+                            ,
+                            xAxis: {
+                                data: d2Array[0],
+                                axisLabel: {
+                                    interval: 0,
+                                    formatter: function (value, index) {
+                                        return value.replace(' ', '\n');
+                                    }
+                                }
+                            }
+                            ,
+                            yAxis: {}
+                            ,
+                            series: d2ArrayShow,
+                            dataZoom: [
+                                {
+                                    type: 'slider',
+                                    start: 0,
+                                    end: 80,
+                                },
+                                {
+                                    type: 'inside', // 类型 inside/slider
+                                    start: 0,      // 左边在 0% 的位置。
+                                    end: 80         // 右边在 80% 的位置。
+                                }
+                            ],
+                            animationEasing: 'elasticOut',
+                            animationDelayUpdate: function (idx) {
+                                return idx * 10;
+                            },
+                            toolbox: {
+                                show: true,
+                                feature: {
+                                    dataView: {
+                                        readOnly: true, optionToContent: function (opt) {
+                                            return buildHtmlTable(arr);
+                                        }
+                                    },
+                                    magicType: {type: ['line', 'bar']},
+                                    restore: {},
+                                    saveAsImage: {}
+                                }
+                            }
+                        }
+                        ;
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+//                document.body.appendChild(buildHtmlTable(data.results));
+            }
+        });
+    });
+
+
+    // Builds the HTML Table out of json data from restful service.
+    function buildHtmlTable(arr) {
+        var table = _table_.cloneNode(false);
+        var columns = addAllColumnHeaders(arr, table);
+
+        for (let i = 0, maxi = arr.length; i < maxi; ++i) {
+            var tr = _tr_.cloneNode(false);
+            for (let j = 0, maxj = columns.length; j < maxj; ++j) {
+                var td = _td_.cloneNode(false);
+                cellValue = arr[i][columns[j]];
+                td.appendChild(document.createTextNode(cellValue || (cellValue == 0 ? '0' : '')));
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        return table;
+    }
+
+    // Adds a header row to the table and returns the set of columns.
+    // Need to do union of keys from all records as some records may not contain
+    // all records
+    function addAllColumnHeaders(arr, table) {
+        var columnSet = [],
+                tr = _tr_.cloneNode(false);
+        for (let i = 0, l = arr.length; i < l; i++) {
+            for (let key in arr[i]) {
+
+                if (arr[i].hasOwnProperty(key) && columnSet.indexOf(key) === -1 && key !== "id") {
+                    columnSet.push(key);
+                    var th = _th_.cloneNode(false);
+                    if (key === "photocount") {
+                        key = "照片数量";
+                    } else if (key === "name") {
+                        key = "学校名称";
+                    } else if (key === "attendancecount") {
+                        key = "考勤数量";
+                    } else if (key === "date") {
+                        key = "日期";
+                    } else if (key === "studentcount") {
+                        key = "学生人数";
+                    }
+                    th.appendChild(document.createTextNode(key));
+                    tr.appendChild(th);
+                }
+            }
+        }
+        table.appendChild(tr);
+
+        return columnSet;
+    }
+
+    jQuery.moveColumn = function (table, from, to) {
+        var rows = jQuery('tr', table);
+        var cols;
+        rows.each(function () {
+            cols = jQuery(this).children('th, td');
+            cols.eq(from).detach().insertBefore(cols.eq(to));
+        });
+    }
+
+</script>
+</body>
+</html>

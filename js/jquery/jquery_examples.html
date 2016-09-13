@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery examples</title>
+    <script src="jquery-3.1.0.js"></script>
+    <style>
+        p {
+            display: inline-block;
+            margin: 10px;
+            padding: 5px;
+            border: 1px dotted deepskyblue;
+            border-radius: 10px;
+        }
+
+        #p16 {
+            background-color: orangered;
+        }
+
+        #p33 {
+            background-color: forestgreen;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<h5>jQuery examples</h5>
+<button class="test">class</button>
+<button id="test">id</button>
+<p id="p0">元素选择器</p>
+
+<p id="p1">click</p>
+<p id="p2">dblclick</p>
+<p id="p3">mouseenter</p>
+<p id="p4">mouseleave</p>
+<p id="p5">mousedown</p>
+<p id="p6">mouseup</p>
+<p id="p7">hover</p>
+<input id="p8">focus</input>
+<input id="p9">blur</input>
+
+<p id="p10">hide</p>
+<p id="p11">show</p>
+<p id="p12">toggle</p>
+<p id="p13">fadeIn</p>
+<p id="p14">fadeOut</p>
+<p id="p15">fadeToggle</p>
+<p id="p16">fadeTo</p>
+<p id="p17">slideDown</p>
+<p id="p18">slideUp</p>
+<p id="p19">slideToggle</p>
+<p id="p20"><code>.text()</code></p>
+<p id="p21"><code>.html()</code></p>
+<input type="text" id="p22" value=",val()">
+<p><a href="http://www.bing.com" id="attr">bing.com</a></p>
+<p id="p23">attr()</p>
+<p id="p24">append()</p>
+<p id="p25">prepend()</p>
+<p id="p26">after()</p>
+<p id="p27">before()</p>
+<p id="p28">remove()<a>aaa</a></p>
+<p id="p29">empty()<a>aaa</a></p>
+<p id="p30">addClass()</p>
+<p id="p31">removeClass()</p>
+<p id="p32">toggleClass()</p>
+<p id="p33">css("background-color")</p>
+<p id="p34">css({"background-color":"yellow","font-size":"200%"})</p>
+<p id="p35">width(),height()</p>
+<p id="p36">innerWidth(),innerHeight()</p>
+<p id="p37">outerWidth(),outerHeight()</p>
+<div>
+    <span>
+        <p id="p38">parent()</p>
+        <p id="p39">parents()</p>
+        <p id="p40">parentsUntil("div")</p>
+    </span>
+</div>
+<p id="p41">children()<span>span<b>b2</b></span></p>
+<p id="p42">find()<span>span<b>b2</b></span></p>
+<p id="p43">siblings()</p>
+<p id="p44">next()</p>
+<p id="p45">nextAll()</p>
+<p id="p46">nextUntil()</p>
+
+
+
+<script>
+
+
+    $(document).ready(function () {
+        //选择器
+        //完整列表: http://www.w3school.com.cn/jquery/jquery_ref_selectors.asp
+        $("#p0").click(function () {
+            //元素选择器
+            console.log('元素选择器');
+        });
+        $("#test").click(function () {
+            //id选择器
+            $("#test").hide();
+        });
+        $(".test").click(function () {
+            //class选择器
+            $(".test").hide();
+        });
+
+
+        //事件
+
+        $('#p1').click(function () {
+            console.log('click');
+        });
+        $("#p2").dblclick(function () {
+            console.log('dblclick');
+        });
+        $('#p3').mouseenter(function () {
+            console.log('mouseenter');
+        });
+        $('#p4').mouseleave(function () {
+            console.log('mouseleave');
+        });
+        $('#p5').mousedown(function () {
+            console.log('mousedown');
+        });
+        $('#p6').mouseup(function () {
+            console.log('mouseup');
+        });
+        $('#p7').hover(function () {
+            console.log('hover');
+        });
+        $('#p8').focus(function () {
+            console.log('focus');
+        });
+        $('#p9').blur(function () {
+            console.log('blur');
+        });
+
+        //效果
+        $('#p10').click(function () {
+            $('#p10').hide(1000);
+        });
+        $('#p11').click(function () {
+            $('#p10').show();
+        });
+        $('#p12').click(function () {
+            $('#p11').toggle();
+        });
+        $('#p13').click(function () {
+            $('#p14').fadeIn();
+        });
+        $('#p14').click(function () {
+            $('#p14').fadeOut();
+        });
+        $('#p15').click(function () {
+            $('#p13').fadeToggle();
+        });
+        $('#p16').click(function () {
+            $('#p16').fadeTo('slow', 0.5);
+        });
+        $('#p17').click(function () {
+            $('#p16').slideDown();
+        });
+        $('#p18').click(function () {
+            $('#p16').slideUp();
+        });
+        $('#p19').click(function () {
+            $('#p16').slideToggle();
+        });
+
+        //html
+        $('#p20').click(function () {
+            alert($("#p20").text())
+        });
+        $('#p21').click(function () {
+            $("#p21").html(function (i, origText) {
+                return "旧 html: " + origText + " 新 html: Hello <b>world!</b> (index: " + i + ")";
+            })
+        });
+        $('#p22').click(function () {
+            $("#p22").val("new text");
+        });
+        $('#p23').click(function () {
+            $('#attr')
+                    .attr({
+                        'href': "http://baidu.com",
+                        'title': "baidu.com"
+                    })
+                    .text("baidu.com");
+        });
+        $('#p24').click(function () {
+            $('#p24').append("<a href='#'>aaa</a>");
+        });
+        $('#p25').click(function () {
+            $('#p25').prepend("<a href='#'>aaa</a>");
+        });
+        $('#p26').click(function () {
+            $('#p26').after("<a href='#'>aaa</a>");
+        });
+        $('#p27').click(function () {
+            $('#p27').before("<a href='#'>aaa</a>");
+        });
+        $('#p28').click(function () {
+            $('#p28').remove();
+        });
+        $('#p29').click(function () {
+            $('#p29').empty();
+        });
+        $('#p30').click(function () {
+            $('#p30').addClass("blue");
+        });
+        $('#p31').click(function () {
+            $('#p30').removeClass("blue");
+        });
+        $('#p32').click(function () {
+            $('#p32').toggleClass("blue");
+        });
+        $('#p33').click(function () {
+            alert($('#p33').css("background-color"));
+        });
+        $('#p34').click(function () {
+            $('#p33').css({"background-color": "yellow", "font-size": "200%"});
+        });
+        $('#p35').click(function () {
+            var txt = "不包括内边距、边框和外边距";
+            txt += " Width: " + $("#p35").width();
+            txt += " Height: " + $("#p35").height();
+            alert(txt);
+        });
+        $('#p36').click(function () {
+            var txt = "包括padding";
+            txt += " innerWidth: " + $("#p35").innerWidth();
+            txt += " innerHeight: " + $("#p35").innerHeight();
+            alert(txt);
+        });
+        $('#p37').click(function () {
+            var txt = "包括padding，border";
+            txt += " outerWidth: " + $("#p35").outerWidth();
+            txt += " outerHeight: " + $("#p35").outerHeight();
+            alert(txt);
+        });
+
+        //遍历
+
+        $('#p38').click(function () {
+            $('#p38').parent().css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p39').click(function () {
+            $('#p38').parents().css({"color": "red", "border": "2px solid red"});
+
+        });
+        $('#p40').click(function () {
+            $('#p38').parentsUntil("div").css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p41').click(function () {
+            $('#p41').children().css({"border": "2px solid blue"})
+        });
+        $('#p42').click(function () {
+            $('#p42').find("b").css({"border": "2px solid blue"});
+        });
+        $('#p43').click(function () {
+            $('#p43').parentsUntil("div").css({"color": "red", "border": "2px solid red"});
+        });
+
+
+    });
+
+</script>
+
+</body>
+</html>
