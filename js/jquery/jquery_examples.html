@@ -24,6 +24,12 @@
         .blue {
             color: blue;
         }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     </style>
 </head>
 <body>
@@ -83,11 +89,22 @@
 <p id="p43">siblings()</p>
 <p id="p44">next()</p>
 <p id="p45">nextAll()</p>
-<p id="p46">nextUntil()</p>
-
+<p id="p46">#46nextUntil()#52</p>
+<p id="p47">first()</p>
+<p id="p48">last()</p>
+<p id="p49">eq(0)</p>
+<p id="p50">#50filter("#p50")</p>
+<p id="p51">#51not("#p51")</p>
+<p id="p52">load()</p>
+<p id="p53">get()</p>
+<p id="p54">post()</p>
+<p id="p55">#55</p>
+<p id="p56">还原</p>
+<canvas id="canvas"></canvas>
 
 
 <script>
+    //    var $ = require("../jquery/jquery-3.1.0.js");
 
 
     $(document).ready(function () {
@@ -260,10 +277,176 @@
             $('#p42').find("b").css({"border": "2px solid blue"});
         });
         $('#p43').click(function () {
-            $('#p43').parentsUntil("div").css({"color": "red", "border": "2px solid red"});
+            $('#p43').siblings().css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p44').click(function () {
+            $('#p44').next().css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p45').click(function () {
+            $('#p45').nextAll().css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p46').click(function () {
+            $('#p46').nextUntil("#p52").css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p47').click(function () {
+            $('p').first().css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p48').click(function () {
+            $('p').last().css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p49').click(function () {
+            $('p').eq(0).css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p50').click(function () {
+            $('p').filter("#p50").css({"color": "red", "border": "2px solid red"});
+        });
+        $('#p51').click(function () {
+            $('p').not("#p51").css({"color": "red", "border": "2px solid red"});
         });
 
+        //ajax
 
+        $("#p52").click(function () {
+            $("#p52").load("a.txt", function (responseTxt, statusTxt, xhr) {
+                console.log(responseTxt)
+                if (statusTxt == "success")
+                    alert("外部内容加载成功!");
+                if (statusTxt == "error")
+                    alert("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        });
+
+        $('#p53').click(function () {
+            $.get("http://localhost:8002/listUsers", function (data, status) {
+                alert(JSON.stringify(data));
+                alert(status);
+            })
+        });
+
+        $('#p54').click(function () {
+            $.post("http://localhost:8002/postUser",
+                    {
+                        name: "_GGG",
+                        love: "JavaScript"
+                    },
+                    function (data, status) {
+                        alert(JSON.stringify(data));
+                        alert(status);
+                    }
+            )
+        });
+
+        $('#p56').click(function () {
+            location.reload();
+        });
+
+        $('#p55').click(function () {
+            (function () {
+                var canvasBody = document.getElementById("canvas"),
+                        ctx = canvasBody.getContext("2d"),
+
+                        w = canvasBody.width = window.innerWidth,
+                        h = canvasBody.height = window.innerHeight,
+
+                        opts = {
+                            bgColor: "rgba(200,200,200,alpha)",
+                            bgAlpha: 1,
+
+                            particleAmount: 100,
+                            particleStyle: "#fcc",
+                            particleSize: 2,
+
+                            radius: 50,
+                            blinkChance: 0.015
+                        },
+
+                        particles = [],
+                        tick = 0,
+
+                        mPress = false,
+                        mPos = {
+                            x: w / 2,
+                            y: h / 2,
+                        }
+
+                function loop() {
+                    window.requestAnimationFrame(loop);
+
+                    ctx.fillStyle = "rgba(0,0,0,0.05)"
+                    ctx.fillRect(0, 0, w, h);
+
+                    tick++;
+
+                    //Pushing particles in, they won't be pushed any time, only now...
+                    while (opts.particleAmount) {
+                        particles.push(new Particle());
+                        opts.particleAmount--
+                    }
+
+                    //Calling every particle to blink and/or update
+                    particles.map(function (Particle) {
+                        Particle.update();
+                        Particle.blink();
+                    });
+                };
+
+                //The constructor of the particle. It stores all the functions and coords for the particles object
+                function Particle() {
+                    this.x = 0;
+                    this.y = 0;
+                    this.style = opts.particleStyle;
+
+                    //The update function of the particle will update its position
+                    this.update = function () {
+                        var randomX = mPos.x - (Math.random() * (opts.radius * 2) - opts.radius),
+                                randomY = mPos.y - (Math.random() * (opts.radius * 2) - opts.radius);
+                        this.x = randomX;
+                        this.y = randomY;
+                    };
+
+                    //And then the blink function makes those particles blink.
+                    this.blink = function () {
+                        var chance = Math.random();
+                        if (chance < opts.blinkChance) {
+                            ctx.fillStyle = this.style;
+                            ctx.fillRect(this.x, this.y, opts.particleSize, opts.particleSize);
+                        }
+                    }
+                };
+
+                //Calling the loop function to start the whole thing. Then, the loop will call itself by window.requestAnimationFrame
+                loop();
+
+                //On mouseDown
+                window.addEventListener("mousedown", function () {
+                    mPress = true;
+                });
+
+                //On mouseUp
+                window.addEventListener("mouseup", function () {
+                    mPress = false;
+                });
+
+                //On mouseMove
+                window.addEventListener("mousemove", function (e) {
+                    mPos.x = e.pageX;
+                    mPos.y = e.pageY;
+                })
+
+                //On resize
+                window.addEventListener("resize", function () {
+                    w = canvasBody.width = window.innerWidth;
+                    h = canvasBody.height = window.innerHeight;
+
+                    //centering the mouse position
+                    mouseP = {
+                        x: w / 2,
+                        y: h / 2
+                    }
+                });
+
+            })();
+        });
     });
 
 </script>
