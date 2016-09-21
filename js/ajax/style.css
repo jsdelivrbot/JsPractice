@@ -1,0 +1,276 @@
+#main {
+    width: auto;
+    min-height: 500px;
+    height: auto !important;
+    height: 500px;
+}
+
+#school-list-container {
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    /*safari and chrome*/
+    select {
+        height: 38px;
+        line-height: 38px;
+        background: #f5f5f5;
+    }
+}
+
+select::-moz-focus-inner { /*Remove button padding in FF*/
+    border: 0;
+    padding: 0;
+}
+
+@-moz-document url-prefix() { /* targets Firefox only */
+    select {
+        padding: 20px 0 !important;
+    }
+}
+
+@media screen\0 {
+    /* IE Hacks: targets IE 8, 9 and 10 */
+    select {
+        height: 38px;
+        line-height: 38px;
+    }
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #a8a8a8;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+/*数据视图*/
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    border: none;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+body {
+    background: #33505e;
+}
+
+/*加载中*/
+.loader {
+    position: absolute;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+h2 {
+    font-family: 'Actor', sans-serif;
+    color: #FFF;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 200;
+    text-align: center;
+}
+
+.loader span {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+    -webkit-animation: 3s infinite linear;
+    -moz-animation: 3s infinite linear;
+    -o-animation: 3s infinite linear;
+
+}
+
+.loader span:nth-child(2) {
+    background: #E84C3D;
+    -webkit-animation: kiri 1.2s infinite linear;
+    -moz-animation: kiri 1.2s infinite linear;
+    -o-animation: kiri 1.2s infinite linear;
+
+}
+
+.loader span:nth-child(3) {
+    background: #F1C40F;
+    z-index: 100;
+}
+
+.loader span:nth-child(4) {
+    background: #2FCC71;
+    -webkit-animation: kanan 1.2s infinite linear;
+    -moz-animation: kanan 1.2s infinite linear;
+    -o-animation: kanan 1.2s infinite linear;
+}
+
+@-webkit-keyframes kanan {
+    0% {
+        -webkit-transform: translateX(20px);
+    }
+
+    50% {
+        -webkit-transform: translateX(-20px);
+    }
+
+    100% {
+        -webkit-transform: translateX(20px);
+        z-index: 200;
+    }
+}
+
+@-moz-keyframes kanan {
+    0% {
+        -moz-transform: translateX(20px);
+    }
+
+    50% {
+        -moz-transform: translateX(-20px);
+    }
+
+    100% {
+        -moz-transform: translateX(20px);
+        z-index: 200;
+    }
+}
+
+@-o-keyframes kanan {
+    0% {
+        -o-transform: translateX(20px);
+    }
+
+    50% {
+        -o-transform: translateX(-20px);
+    }
+
+    100% {
+        -o-transform: translateX(20px);
+        z-index: 200;
+    }
+}
+
+@-webkit-keyframes kiri {
+    0% {
+        -webkit-transform: translateX(-20px);
+        z-index: 200;
+    }
+    50% {
+        -webkit-transform: translateX(20px);
+    }
+    100% {
+        -webkit-transform: translateX(-20px);
+    }
+}
+
+@-moz-keyframes kiri {
+    0% {
+        -moz-transform: translateX(-20px);
+        z-index: 200;
+    }
+    50% {
+        -moz-transform: translateX(20px);
+    }
+    100% {
+        -moz-transform: translateX(-20px);
+    }
+}
+
+@-o-keyframes kiri {
+    0% {
+        -o-transform: translateX(-20px);
+        z-index: 200;
+    }
+    50% {
+        -o-transform: translateX(20px);
+    }
+    100% {
+        -o-transform: translateX(-20px);
+    }
+}

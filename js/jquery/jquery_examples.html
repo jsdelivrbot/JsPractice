@@ -98,14 +98,11 @@
 <p id="p52">load()</p>
 <p id="p53">get()</p>
 <p id="p54">post()</p>
-<p id="p55">#55</p>
-<p id="p56">还原</p>
+<p id="p55">还原</p>
 <canvas id="canvas"></canvas>
-
 
 <script>
     //    var $ = require("../jquery/jquery-3.1.0.js");
-
 
     $(document).ready(function () {
         //选择器
@@ -193,7 +190,7 @@
         $('#p21').click(function () {
             $("#p21").html(function (i, origText) {
                 return "旧 html: " + origText + " 新 html: Hello <b>world!</b> (index: " + i + ")";
-            })
+            });
         });
         $('#p22').click(function () {
             $("#p22").val("new text");
@@ -336,116 +333,8 @@
             )
         });
 
-        $('#p56').click(function () {
-            location.reload();
-        });
-
         $('#p55').click(function () {
-            (function () {
-                var canvasBody = document.getElementById("canvas"),
-                        ctx = canvasBody.getContext("2d"),
-
-                        w = canvasBody.width = window.innerWidth,
-                        h = canvasBody.height = window.innerHeight,
-
-                        opts = {
-                            bgColor: "rgba(200,200,200,alpha)",
-                            bgAlpha: 1,
-
-                            particleAmount: 100,
-                            particleStyle: "#fcc",
-                            particleSize: 2,
-
-                            radius: 50,
-                            blinkChance: 0.015
-                        },
-
-                        particles = [],
-                        tick = 0,
-
-                        mPress = false,
-                        mPos = {
-                            x: w / 2,
-                            y: h / 2,
-                        }
-
-                function loop() {
-                    window.requestAnimationFrame(loop);
-
-                    ctx.fillStyle = "rgba(0,0,0,0.05)"
-                    ctx.fillRect(0, 0, w, h);
-
-                    tick++;
-
-                    //Pushing particles in, they won't be pushed any time, only now...
-                    while (opts.particleAmount) {
-                        particles.push(new Particle());
-                        opts.particleAmount--
-                    }
-
-                    //Calling every particle to blink and/or update
-                    particles.map(function (Particle) {
-                        Particle.update();
-                        Particle.blink();
-                    });
-                };
-
-                //The constructor of the particle. It stores all the functions and coords for the particles object
-                function Particle() {
-                    this.x = 0;
-                    this.y = 0;
-                    this.style = opts.particleStyle;
-
-                    //The update function of the particle will update its position
-                    this.update = function () {
-                        var randomX = mPos.x - (Math.random() * (opts.radius * 2) - opts.radius),
-                                randomY = mPos.y - (Math.random() * (opts.radius * 2) - opts.radius);
-                        this.x = randomX;
-                        this.y = randomY;
-                    };
-
-                    //And then the blink function makes those particles blink.
-                    this.blink = function () {
-                        var chance = Math.random();
-                        if (chance < opts.blinkChance) {
-                            ctx.fillStyle = this.style;
-                            ctx.fillRect(this.x, this.y, opts.particleSize, opts.particleSize);
-                        }
-                    }
-                };
-
-                //Calling the loop function to start the whole thing. Then, the loop will call itself by window.requestAnimationFrame
-                loop();
-
-                //On mouseDown
-                window.addEventListener("mousedown", function () {
-                    mPress = true;
-                });
-
-                //On mouseUp
-                window.addEventListener("mouseup", function () {
-                    mPress = false;
-                });
-
-                //On mouseMove
-                window.addEventListener("mousemove", function (e) {
-                    mPos.x = e.pageX;
-                    mPos.y = e.pageY;
-                })
-
-                //On resize
-                window.addEventListener("resize", function () {
-                    w = canvasBody.width = window.innerWidth;
-                    h = canvasBody.height = window.innerHeight;
-
-                    //centering the mouse position
-                    mouseP = {
-                        x: w / 2,
-                        y: h / 2
-                    }
-                });
-
-            })();
+            location.reload();
         });
     });
 

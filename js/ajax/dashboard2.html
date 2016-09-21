@@ -2,80 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>dashboard2</title>
+    <title>dashboard</title>
     <script type="text/javascript" src="jquery-3.1.0.js"></script>
-    <script type="text/javascript" src="echarts.js"></script>
+    <script src="//cdn.bootcss.com/echarts/3.2.3/echarts.common.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-<div id="main" style="width: auto;height:500px;"></div>
-</body>
-<script>
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+<!--加载中-->
+<div class="loader">
+    <h2>loading...</h2>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
-    option = {
-        title: {
-            text: '折线图堆叠'
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            data: ['学校1', '学校2', '学校3', '学校4', '学校5']
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        toolbox: {
-            feature: {
-                saveAsImage: {}
-            }
-        },
-        xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: '学校1',
-                type: 'line',
-                stack: '总量',
-                data: [120, 132, 101, 134, 90, 230, 210]
-            },
-            {
-                name: '学校2',
-                type: 'line',
-                stack: '总量',
-                data: [220, 182, 191, 234, 290, 330, 310]
-            },
-            {
-                name: '学校3',
-                type: 'line',
-                stack: '总量',
-                data: [150, 232, 201, 154, 190, 330, 410]
-            },
-            {
-                name: '学校4',
-                type: 'line',
-                stack: '总量',
-                data: [320, 332, 301, 334, 390, 330, 320]
-            },
-            {
-                name: '学校5',
-                type: 'line',
-                stack: '总量',
-                data: [820, 932, 901, 934, 1290, 1330, 1320]
-            }
-        ]
-    };
-    myChart.setOption(option);
-</script>
+<div id="container">
+
+    <!--选择学校-->
+    <div id="school-list-container">
+        <select id="school-list">
+        </select>
+    </div>
+    <!--图表-->
+    <div id="main"></div>
+</div>
+
+<div id="data-view" class="modal">
+
+    <!--弹出层-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+        </div>
+        <div id="modal-body">
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="main.js"></script>
+</body>
 </html>
