@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+
+    div {
+        border: 2px solid gray;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin: 36px 24px;
+        -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        transition: background-color 1000ms;
+    }
+
+    #tree {
+        width: 80%;
+        height: 300px;
+        margin: 20px auto;
+    }
+</style>
+<body>
+
+<button id="preOrder">前序</button>
+<button id="inOrder">中序</button>
+<button id="postOrder">后序</button>
+<div id="tree">
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+        <div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $ = function (ele) {
+        return document.querySelector(ele)
+    }
+    var animationList = [];
+    var timer;
+
+    function addEvent(ele, event, hanlder) {
+        if (ele.addEventListener) {
+            ele.addEventListener(event, hanlder, false);
+        } else if (ele.attachEvent) {
+            ele.attachEvent('on' + event, hanlder);
+        } else {
+            ele['on' + event] = hanlder;
+        }
+    }
+
+    addEvent('#preOrder', 'click', function (e) {
+        BT.preOrder(document.getElementById('tree'))
+        BT.animate();
+    })
+
+    var BT = {
+        preOrder: function (node) {
+            if (node != null) {
+                animationList.push();
+                if (node.firstElementChild) {
+                    arguments.callee(node.firstElementChild);
+                }
+                if (node.lastElementChild) {
+                    arguments.callee(node.lastElementChild);
+                }
+            }
+        },
+
+        inOrder: function (node) {
+            if (node != null) {
+                if (node.firstElementChild) {
+                    arguments.callee(node.firstElementChild);
+                }
+                animationList.push();
+
+                if (node.lastElementChild) {
+                    arguments.callee(node.lastElementChild);
+                }
+            }
+        },
+
+        postOrder: function (node) {
+            if (node != null) {
+                if (node.firstElementChild) {
+                    arguments.callee(node.firstElementChild);
+                }
+                if (node.lastElementChild) {
+                    arguments.callee(node.lastElementChild);
+                }
+                animationList.push();
+
+            }
+        },
+
+        animate: function () {
+            var i = 0;
+
+            animationList[i].style.backgroundColor = 'pink';
+            timer = setInterval(function (argument) {
+                i++;
+                if (i < animationList.length) {
+                    animationList[i - 1].style.backgroundColor = '#fff';
+                    animationList[i].style.backgroundColor = 'blue';
+                } else {
+                    clearInterval(timer);
+                    animationList[animationList.length - 1].style.backgroundColor = '#fff';
+                }
+            }, 500)
+        }
+    }
+
+</script>
+</html>
