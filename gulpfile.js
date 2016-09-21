@@ -4,7 +4,6 @@ var cleanCSS = require('gulp-clean-css');
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
 
-
 // 使用 gulp 压缩 JS
 gulp.task('js', function () {
     gulp.src('js/ajax/main.js')
@@ -34,7 +33,7 @@ gulp.task('auto', function () {
     // 监听文件修改，当文件被修改则执行 css 任务
     gulp.watch('js/**/*.js', ['css'])
     gulp.watch('css/**/*.css', ['css'])
-    gulp.watch(['./**/*.html', './**/*.css', './**/*.js'], reload);
+    gulp.watch(['./src/**/*.html', './src/**/*.css', './src/**/*.js'], reload);
 
 });
 

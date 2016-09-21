@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幻灯片</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+        }
+
+    </style>
+    <script>
+        window.onload = function () {
+            var ul = document.getElementsByClassName('ul');
+            var imgs = ul[0].getElementsByTagName('li');
+            var index;
+            var i;
+
+            function autoPlay() {
+                play = setInterval(function () {
+                    index++;
+                    index >= imgs.length && (index = 0);
+                    show(index);
+                }, 2000);
+            }
+
+            function show(a) {
+                var alpha = 0;
+                for (i = 0; i < imgs.length; i++) {
+                    imgs[i].style.opacity = 0;
+                    imgs[i].style.filter = 'alpha(opacity=0)';
+                }
+
+
+            }
+
+        };
+
+        var play;
+
+
+    </script>
+</head>
+<body>
+<ul>
+    <li id="li1"><img src="../../../images/01.jpg"></li>
+    <li id="li2"><img src="../../../images/02.jpg"></li>
+    <li id="li3"><img src="../../../images/03.jpg"></li>
+    <li id="li4"><img src="../../../images/04.jpg"></li>
+    <li id="li5"><img src="../../../images/05.jpg"></li>
+</ul>
+</body>
+</html>

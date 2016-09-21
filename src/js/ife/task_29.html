@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task_29</title>
+</head>
+<style>
+    input:nth-child(1) {
+        width: 300px;
+        height: 38px;
+        border-radius: 5px;
+        border: 1px solid #a8a8a8;
+        padding-left: 10px;
+    }
+
+    input:nth-child(2) {
+        background-color: #2f79ba;
+        border: 2px solid white;
+        color: white;
+        border-radius: 5px;
+        width: 100px;
+        height: 50px;
+    }
+
+</style>
+<body>
+<label>
+    名称<input id="msg" type="text">
+    <input type="button" value="验证" onclick="validate()">
+    <p id="tip"></p>
+</label>
+</body>
+<script>
+    var msg = document.getElementById('msg');
+    var tip = document.getElementById('tip');
+
+    function validate() {
+        var msgValue = msg.value;
+        if (getLength(msgValue) == 0) {
+            tip.innerHTML = '姓名不能为空';
+            tip.style.color = 'red';
+            msg.style.border = '2px solid red';
+        }
+        else if (getLength(msgValue) >= 4 && getLength(msgValue) <= 16) {
+            tip.innerHTML = '格式正确';
+            tip.style.color = 'lightgreen';
+            msg.style.border = '2px solid lightgreen';
+        }
+        else {
+            tip.innerHTML = '字符数应为4~16位';
+            tip.style.color = 'red';
+            msg.style.border = '2px solid red';
+        }
+
+    }
+
+    function getLength(str) {
+        var realLength = 0;
+        for (var i = 0; i < str.length; i++) {
+            var charCode = str.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) {
+                realLength += 1;
+            } else {
+                realLength += 2;
+            }
+        }
+        return realLength;
+    }
+</script>
+</html>

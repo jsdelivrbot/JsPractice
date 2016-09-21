@@ -1,0 +1,30 @@
+{
+  "name": "JsPractice",
+  "version": "1.0.0",
+  "description": "javascript practice",
+  "main": "index",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-ruby-sass": "^2.1.0",
+    "gulp-uglify": "^2.0.0",
+    "browser-sync": "^2.16.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigggge/JsPractice.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "xiepan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigggge/JsPractice/issues"
+  },
+  "homepage": "https://github.com/bigggge/JsPractice#readme"
+}
