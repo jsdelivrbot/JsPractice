@@ -3,31 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <title>task_1_1_1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 900px;
+            /*居中*/
+            margin: 0 auto;
+            font: 12px/2.0 "Microsoft YaHei";
+        }
+
+        header, footer {
+            height: 60px;
+            color: white;
+            background-color: #333333;
+        }
+
+        /*在浏览器中，空白符是不会被浏览器忽略的，多个连续的空白符浏览器会自动将其合并成一个。
+        我们编写代码时写的空格，换行都会产生空白符。所以自然而然的两个元素之间会有空白符，
+        如果将上述例子中的a标签写成一行，空白符消失，菜单之间也就紧凑起来了。*/
+        /*空白符虽然是浏览器正常的表现行为。*/
+        /*要去除空白符产生的间隙，首先要理解空白符归根结底是个字符，
+        通过设置font-size属性可以控制产生的间隙的大小。*/
+        /*设置父元素的字体为“0”，然后在“inline-block”元素上重置字体需要的大小*/
+        #header-nav > ul {
+            font-size: 0px;
+        }
+
+        #header-nav > ul > li {
+            /*让nav的item横向排列*/
+            /*inline-block拥有block元素可以设置width和height的特性*/
+            display: inline-block;
+            width: 100px;
+            font-size: 16px;
+            border: 1px solid red;
+        }
+
+        #header-nav a {
+            color: #fff;
+            /*去掉下划线*/
+            text-decoration: none;
+            /*拥有块元素特性，宽高才起作用*/
+            display: inline-block;
+            /*居中*/
+            height: 58px;
+            line-height: 58px;
+            width: 100%;
+            text-align: center;
+        }
+
+        #header-nav li:hover {
+            background-color: #f00;
+        }
+
+        h2 {
+            margin-bottom: 0.5em;
+        }
+
+        section.big-box {
+            background-color: #dedede;
+            padding: 20px;
+        }
+
+        section.big-box > * {
+            background-color: white;
+            margin-bottom: 20px;
+            padding: 35px;
+        }
+
+        section.big-box > *:last-child {
+            margin-bottom: 0;
+            padding: 35px;
+        }
+
+        .small-text {
+            font-size: 0.8em;
+        }
+
+        #image-list > li {
+            border: 1px solid #cecece;
+            width: 100px;
+            height: 120px;
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #image-list > li img {
+            width: 100px;
+            height: 80px;
+            margin-top: 10px;
+        }
+
+        #prize-table {
+            width: 100%;
+            border-spacing: 0;
+            border: 1px solid #cecece;
+        }
+
+        #prize-table thead {
+            background-color: black;
+            color: white;
+        }
+
+        #prize-table tbody {
+            border-right: 1px solid #dbdbdb;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        #prize-table tfoot {
+            background-color: #cccccc;
+            font-weight: bold;
+        }
+
+        aside h2 {
+            border-left: 3px solid #cccccc;
+            padding-left: 10px;
+        }
+
+        aside form {
+            width: 640px;
+            margin: 0 auto;
+        }
+
+        aside .form-title {
+            display: inline-block;
+            width: 160px;
+            text-align: right;
+            vertical-align: top;
+        }
+
+        aside .form-placeholder {
+            margin-left: 160px;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        aside form button {
+            width: 100%;
+            padding: 10px 0 10px 0;
+            border: 1px solid blue;
+            border-radius: 5px;
+            background-color: blue;
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            line-height: 60px;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
 </head>
+
 <body>
 
-<title>网站一级标题</title>
+<header class="clearfix">
+    <span>网站一级标题</span>
+    <nav id="header-nav" class="float-right">
+        <ul>
+            <li><a href="#">导航链接一</a></li>
+            <li><a href="#">导航链接二</a></li>
+            <li><a href="#">导航链接三</a></li>
+            <li><a href="#">导航链接四</a></li>
+        </ul>
+    </nav>
+</header>
 
-<ul>
-    <li><a>导航链接一</a></li>
-    <li><a>导航链接二</a></li>
-    <li><a>导航链接三</a></li>
-    <li><a>导航链接四</a></li>
-</ul>
+<section class="big-box">
 
-<h1>文章一级标题</h1>
-<h2>文章二级标题</h2>
-<p>
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
-    这是一个很长很长的段落，这是一个很长很长的段落，
-</p>
+    <article>
+        <h2>文章一级标题</h2>
+        <h3>文章二级标题</h3>
+        <p>
+            <span class="small-text">文章作者</span>
+            <span class="small-text">文章发表时间</span>
+        </p>
+        <p>
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，换行了<br>这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，<b>这里有个粗体字</b>这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            <a href="ife.baidu.com">这里有一个链接</a>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，
+        </p>
+        <img src="../../images/01.jpg">
 
+        <p>
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，换行了<br>这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，<b>这里有个粗体字</b>这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            <a href="ife.baidu.com">这里有一个链接</a>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，
+        </p>
+    </article>
+
+    <article>
+        <h2>另一篇文章一级标题</h2>
+        <h3>文章二级标题</h3>
+        <p>
+            <span>文章作者</span>
+            <span>文章发表时间</span>
+        </p>
+        <p>
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，换行了<br>这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，<b>这里有个粗体字</b>这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            <a href="ife.baidu.com">这里有一个链接</a>这是一个很长很长的段落，这是一个很长很长的段落，这是一个很长很长的段落，
+            这是一个很长很长的段落，这是一个很长很长的段落，
+        </p>
+
+
+        <img src="../../images/01.jpg">
+        <ul style="list-style-type: none">
+            <li>列表项目一</li>
+            <li>列表项目二</li>
+            <li>列表项目三</li>
+        </ul>
+
+        <h2>图片</h2>
+        <ul id="image-list" style="list-style-type:none;">
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+            <li><p>好看的图片</p><img src="../../images/01.jpg" alt=""/></li>
+        </ul>
+    </article>
+    <article>
+        <h2>最后一篇文章一级标题</h2>
+        <h3>文章二级标题</h3>
+        <p>
+            <span>文章作者</span>
+            <span>文章发表时间</span>
+        </p>
+
+        <ol>
+            <li>排名1</li>
+            <li>排名2</li>
+            <li>排名3</li>
+        </ol>
+
+        下面是一个表格
+        <table id="prize-table" border="1">
+            <thead>
+            <tr>
+                <th>表头</th>
+                <th>表头</th>
+                <th>表头</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="#">操作</a></td>
+            </tr>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="#">操作</a></td>
+            </tr>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="#">操作</a></td>
+            </tr>
+            <tr>
+                <td>表内容单元格</td>
+                <td>表内容单元格</td>
+                <td><a href="#">操作</a></td>
+            </tr>
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>总计</td>
+                <td colspan="2">1000</td>
+            </tr>
+            </tfoot>
+
+        </table>
+    </article>
+
+    <aside>
+        <h2>侧栏的标题</h2>
+        <h2>侧栏注册窗口标题</h2>
+
+        <form action="do" method="post">
+            <div>
+                <label class="form-title" for="email">请输入邮箱地址</label>
+                <input class="" id="email" type="text" placeholder="这是一个文本输入框">
+                <div class="form-placeholder">邮箱地址请按要求格式输入</div>
+            </div>
+
+            <div>
+                <label class="form-title">请输入密码</label>
+                <input type="text" placeholder="这是一个文本输入框">
+            </div>
+
+            <div>
+                <label class="form-title">请重复输入密码</label>
+                <input type="text" placeholder="这是一个文本输入框">
+                <div class="form-placeholder">密码为6-16位英文数字</div>
+            </div>
+            <div>
+                <span class="form-title">性别</span>
+                <!--name相同才可以单选-->
+                <label><input type="radio" name="gender" value="m">男</label>
+                <label><input type="radio" name="gender" value="f" checked>女</label>
+            </div>
+            <div>
+                <label class="form-title">城市</label>
+                <select name="city">
+                    <option value="北京" selected>北京</option>
+                    <option value="广州">广州</option>
+                </select>
+
+            </div>
+
+            <div>
+                <span class="form-title">爱好</span>
+                <label>运动</label>
+                <input type="checkbox" name="interest" value="sport">
+                <label>艺术</label>
+                <input type="checkbox" name="interest" value="art">
+                <label>科学</label>
+                <input type="checkbox" name="interest" value="science">
+            </div>
+
+            <div>
+                <span class="form-title">个人描述</span>
+                <textarea name="desc" placeholder="请用一句话对你进行描述" rows="5" cols="20"></textarea>
+            </div>
+
+            <button type="submit">确认提交</button>
+        </form>
+    </aside>
+</section>
+<footer>
+    <span>版权所有</span>
+</footer>
 </body>
 </html>
