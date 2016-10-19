@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery/jquery-3.1.0.js"></script>
+</head>
+<style>
+    div:nth-child(1) {
+        background-color: #2D93CA;
+        width: 10%;
+    }
+
+    div:nth-child(2) {
+        background-color: #ca437b;
+        width: 20%;
+
+    }
+
+    div:nth-child(3) {
+        background-color: #cab88e;
+    }
+
+    div {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+</style>
+<body>
+
+<article>
+    <div id="foo">
+        1
+    </div>
+    <div>
+        2
+    </div>
+    <div>
+        3
+    </div>
+</article>
+<script>
+    var foo = $('#foo');
+    console.log(foo);
+
+</script>
+
+</body>
+</html>

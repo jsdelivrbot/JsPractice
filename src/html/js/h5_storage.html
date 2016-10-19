@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web 存储</title>
+</head>
+<body>
+
+<script>
+    // sessionStorage 方法针对一个 session 进行数据存储。当用户关闭浏览器窗口后，数据会被删除。
+    if (sessionStorage.hits) {
+        sessionStorage.hits = Number(sessionStorage.hits) + 1;
+    } else {
+        sessionStorage.hits = 1;
+    }
+
+    document.write("Total Hits:" + sessionStorage.hits);
+
+    //localStorage - 没有时间限制的数据存储
+    if (localStorage.hits) {
+        localStorage.hits = Number(localStorage.hits) + 1;
+    } else {
+        localStorage.hits = 1;
+    }
+
+    document.write("Total Hits :" + localStorage.hits);
+</script>
+
+</body>
+</html>
