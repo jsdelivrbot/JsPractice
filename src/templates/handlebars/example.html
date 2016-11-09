@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>handlebars</title>
+    <script src="../../../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../../../node_modules/handlebars/dist/handlebars.js"></script>
+</head>
+<body>
+
+<script id="entry-template" type="text/x-handlebars-template">
+    <div>
+        <h1>{{title}}</h1>
+        <div>
+            {{body}}
+        </div>
+    </div>
+</script>
+
+<script id="helper" type="text/x-handlebars-template">
+    {{#list people}}{{firstName}} {{lastName}}{{/list}}
+</script>
+
+
+</body>
+<script>
+    var source = $('#entry-template').html();
+    var template = Handlebars.compile(source);
+
+    var context = {title: "t", body: "<p></p>This is my first post!"};
+    var html = template(context);
+    console.log(html);
+
+    // 我们创建一个叫list的helper来生成列表，
+    // helper接受people作为第一个参数，一个option对象（hash）作为第二个参数。
+    // option包含一个属性fn，他可以调用一个context就像普通模板一样。
+    Handlebars.registerHelper('list', function (items, options) {
+        var out = "<ul>";
+
+        for (var i = 0, l = items.length; i < l; i++) {
+            out = out + "<li>" + options.fn(items[i]) + "</li>";
+        }
+
+        return out + "</ul>";
+    })
+
+</script>
+</html>

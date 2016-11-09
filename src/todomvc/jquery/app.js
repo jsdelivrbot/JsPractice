@@ -1,6 +1,10 @@
 /**
  * app.js
  *
+ * Models: LocalStorage
+ * Controllers: create or destroy
+ * View: Handlebars
+ *
  * Created by xiepan on 2016/11/9 上午10:13.
  */
 jQuery(function ($) {
@@ -26,8 +30,11 @@ jQuery(function ($) {
                 }.bind(this)
             }).init('/all');
         },
+
         bindEvents: function () {
-            $('#new-todo').on('keyup', this.create.bind(this));
+            $('#new-todo').on('keyup', this.createTodo.bind(this));
+            // onchange 在元素值改变时触发。
+            // onchange 属性适用于：<input>、<textarea> 以及 <select> 元素。
             $('#toggle-all').on('change', this.toggleAll.bind(this));
             $('#footer').on('click', '#clear-completed', this.destroyCompleted.bind(this));
             $('#todo-list')
@@ -108,7 +115,7 @@ jQuery(function ($) {
 
         },
 
-        create: function (e) {
+        createTodo: function (e) {
             var $input = $(e.target);
             var val = $input.val().trim();
 
