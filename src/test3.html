@@ -29,20 +29,71 @@
 </style>
 <body>
 
-<article>
-    <div id="foo">
-        1
-    </div>
-    <div>
-        2
-    </div>
-    <div>
-        3
-    </div>
-</article>
+<!--<article>-->
+<!--<div id="foo">-->
+<!--1-->
+<!--</div>-->
+<!--<div>-->
+<!--2-->
+<!--</div>-->
+<!--<div>-->
+<!--3-->
+<!--</div>-->
+<!--</article>-->
+
+<div>123
+    <span>span</span>
+</div>
 <script>
-    var foo = $('#foo');
-    console.log(foo);
+    //    //    var foo = $('#foo');
+    //    //    console.log(foo);
+    //    var div = document.getElementsByTagName('div')[0]
+    //    var span = document.getElementsByTagName('span')[0]
+    //    div.addEventListener('click', function () {
+    //        alert('123');
+    //    }, false);
+    //    span.addEventListener('click', function (e) {
+    //        alert('span');
+    //        console.log(e)
+    ////        for (var x in e) {
+    ////            console.log(x + "    " + e[x]);
+    ////        }
+    //    }, true);
+
+    function SuperType() {
+        this.property = 'super';
+    }
+
+    SuperType.prototype.getSuperValue = function () {
+        return this.property;
+    };
+
+    function SubType() {
+        this.subproperty = 'sub';
+    }
+
+    //    //2
+    //    SubType.prototype.getSubValue = function () {
+    //        return this.subproperty;
+    //    };
+    //    //3
+    //    SuperType.prototype.getSuperValue = function () {
+    //        return 'change';
+    //    };
+    //1
+    SubType.prototype = new SuperType();
+
+    SubType.prototype = {
+        getSubValue: function () {
+
+        }
+    }
+
+    var instance = new SubType();
+    alert(instance.getSuperValue());
+
+
+    var person = new Person();
 
 </script>
 

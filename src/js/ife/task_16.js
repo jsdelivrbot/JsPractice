@@ -88,8 +88,8 @@ function init() {
     // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
     document.getElementById('aqi-table').addEventListener('click', function (event) {
         if (event.target.nodeName.toLowerCase() === 'button') {
-            // delBtnHandle.call(null, event.target.dataset.city);
-            delBtnHandle2(event.target);
+            delBtnHandle.call(null, event.target.dataset.city);
+            // delBtnHandle2(event.target);
         }
     })
 }

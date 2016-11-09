@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="underscore.js"></script>
+</head>
+<body>
+<script>
+
+
+    function add(a, b) {
+        return a + b;
+    }
+
+    //    function add2(numbers) {
+    //        return _.reduce(numbers, function (a, b) {
+    //            return a + b;
+    //        }, 0);
+    //    }
+
+    function add2(numbers) {
+        return numbers.reduce(function (a, b) {
+            return a + b;
+        }, 0);
+//        return Array.prototype.reduce.call(numbers, function (a, b) {
+//            return a + b;
+//        }, 0)
+    }
+
+    function add3() {
+        var numbers = Array.prototype.slice.call(arguments);
+        return numbers.reduce(function (a, b) {
+            return a + b;
+        }, 0);
+    }
+
+    function add4(a) {
+        var rest = Array.prototype.slice.call(arguments, 1);
+        return rest.reduce(function (accum, current) {
+            return accum + current;
+        }, a);
+    }
+
+    function add5(i, ...arr) {
+        return arr.reduce(function (a, b) {
+            return a + b;
+        }, i);
+    }
+
+    console.log(add(1, 2))
+    console.log(add2([1, 2, 3, 4, 5]))
+    console.log(add3(1, 2, 3, 4, 5))
+    console.log(add4(1, 2, 3))
+    console.log(add5(1, 2, 3))
+</script>
+</body>
+</html>

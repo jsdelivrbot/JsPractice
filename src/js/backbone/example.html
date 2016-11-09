@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>backbone</title>
+    <script src="libs/jquery-3.1.0.js"></script>
+    <script src="../underscore/underscore.js"></script>
+    <script src="libs/backbone.js"></script>
+</head>
+<body>
+<button id="check">新手报到</button>
+<ul id="world-list">
+</ul>
+<script>
+    World = Backbone.Model.extend({
+        name: null
+    });
+
+    Worlds = Backbone.Collection.extend({
+        initialize: function (models, options) {
+            this.bind('add', options.view.addOneWorld);
+        }
+    });
+
+    AppView = Backbone.View.extend({
+        el: $('body'),
+        initialize: function () {
+            this.worlds = new Worlds(null, {view: this})
+        },
+        events: {
+            'click #check': 'checkIn',
+        },
+        checkIn: function () {
+            var world_name = prompt('你是哪里人？');
+            if (world_name == '') {
+                world_name = '未知';
+            }
+            var world = new World({name: world_name});
+            this.worlds.add(world);
+        },
+        addOneWorld: function (model) {
+            $('#world-list').append('<li>来自<b>' + model.get('name')
+                    + '</b>的问候</li>')
+        }
+    });
+    var appview = new AppView;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<select>
+    <option value="123">123</option>
+    <option value="222">222</option>
+    <option value="333">333</option>
+    <option value="444">444</option>
+    <option value="555">555</option>
+</select>
+
+<!--富文本编辑-->
+<iframe name="richedit"></iframe>
+<br/>
+<button onclick="bold()">加黑</button>
+<button onclick="italic()">斜体</button>
+</body>
+<script>
+    var sel = document.getElementsByTagName('select')[0];
+    var newOpt = new Option('opt', "opt");
+    //新选项,位于新选项之后的选项
+    sel.add(newOpt, sel.options[1])
+
+    window.onload = function () {
+        frames["richedit"].document.designMode = "on";
+    }
+
+    function bold() {
+        frames["richedit"].document.execCommand("bold", false, null);
+    }
+
+    function italic() {
+        frames["richedit"].document.execCommand("italic", false, null);
+    }
+
+</script>
+</html>

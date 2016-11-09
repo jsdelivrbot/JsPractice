@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mustache</title>
+    <script src="../../../node_modules/mustache/mustache.js"></script>
+</head>
+
+<body>
+<script>
+    var data = {
+        'company': 'Apple',
+        'address': {
+            'street': 'I Loop',
+            'city': 'California',
+            'state': 'CA',
+            'zip': '95014'
+        },
+        'product': ['MacBook', 'iPhone', 'iPad']
+    }
+
+    var tpl = '<h1>Hello {{company}}</h1>';
+    var html = Mustache.render(tpl, data);
+
+
+</script>
+
+</body>
+</html>

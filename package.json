@@ -9,6 +9,9 @@
     "gulp-clean-css": "^2.0.12",
     "gulp-ruby-sass": "^2.1.0",
     "gulp-uglify": "^2.0.0",
+    "handlebars": "^4.0.5",
+    "mustache": "^2.3.0",
+    "underscore": "^1.8.3",
     "zepto": "^1.2.0"
   },
   "devDependencies": {},
