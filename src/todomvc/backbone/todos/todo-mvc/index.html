@@ -11,7 +11,6 @@
 <div id="todoapp">
 
     <header>
-        <h1>Todos</h1>
         <input id="new-todo" type="text" placeholder="What needs to be done?">
     </header>
 
@@ -33,12 +32,6 @@
 </div>
 
 
-<script src="../../libs/jquery-3.1.0.js"></script>
-<script src="../../libs/underscore.js"></script>
-<script src="../../libs/backbone.js"></script>
-<script src="../backbone.localStorage.js"></script>
-<script src="todos.js"></script>
-
 <!-- Templates -->
 
 <script type="text/template" id="item-template">
@@ -56,6 +49,18 @@
     <% } %>
     <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
 </script>
+
+
+<script src="../../libs/jquery-3.1.0.js"></script>
+<script src="../../libs/underscore.js"></script>
+<script src="../../libs/backbone.js"></script>
+<script src="../backbone.localStorage.js"></script>
+<script src="models/todo.js"></script>
+<script src="collections/todos.js"></script>
+<script src="views/todo-view.js"></script>
+<script src="views/app-view.js"></script>
+<script src="app.js"></script>
+
 
 </body>
 </html>

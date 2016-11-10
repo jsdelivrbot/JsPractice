@@ -18,7 +18,7 @@ jQuery(function ($) {
 
     var App = {
         init: function () {
-            this.todos = this.store('todos-jquery');
+            this.todos = this.store('todo-mvc-jquery');
             this.todoTemplate = Handlebars.compile($('#todo-template').html());
             this.footerTemplate = Handlebars.compile($('#footer-template').html());
             this.bindEvents();
@@ -52,7 +52,7 @@ jQuery(function ($) {
             $('#toggle-all').prop('checked', this.getActiveTodos().length === 0);
             this.renderFooter();
             $('#new-todo').focus();
-            this.store('todos-jquery', this.todos);
+            this.store('todo-mvc-jquery', this.todos);
         },
 
         renderFooter: function () {

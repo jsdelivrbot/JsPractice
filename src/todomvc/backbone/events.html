@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>backbone</title>
+    <script src="libs/jquery-3.1.0.js"></script>
+    <script src="libs/underscore.js"></script>
+    <script src="libs/backbone.js"></script>
+</head>
+<body>
+<button id="check">新手报到</button>
+<ul id="world-list">
+</ul>
+<script>
+//    var o = {};
+//    // _.extend(destination, *sources)
+//    // 复制source对象中的所有属性覆盖到destination对象上，并且返回 destination 对象
+//    // Extend a given object with all the properties in passed-in object(s).
+//    _.extend(o, Backbone.Events);
+//
+//    // Bind an event to a `callback` function.
+//    o.on('custom', function (index) {
+//        alert(index)
+//    });
+//
+//    for (var i = 0; i < 3; i++) {
+//        // Trigger one or many events, firing all bound callbacks.
+//        o.trigger('custom', i);
+//    }
+//    // Remove one or many callbacks.
+//    o.off('custom');
+//
+//    o.trigger('custom', i);
+
+//    var obj = {};
+//    _.extend(obj, Backbone.Events);
+//    obj.on('alert', function (msg) {
+//        alert(msg);
+//    })
+//
+//    obj.trigger('alert', 'an');
+
+// 创建一个Model的实例
+var m = new Backbone.Model();
+
+// 将监听函数绑定到m对象的all事件中
+m.on('all', function() {
+    alert('all');
+});
+// 将监听函数绑定到m对象的自定义事件show中
+m.on('show', function() {
+    alert('show title');
+});
+// 将另一个监听函数绑定到m对象的自定义事件show中
+m.on('show', function() {
+    alert('show content');
+});
+// 将监听函数绑定到m对象的自定义事件hide中
+m.on('hide', function() {
+    alert('hide');
+});
+
+// 触发m对象的show事件和hide事件
+m.trigger('show');
+m.trigger('hide');
+
+</script>
+
+</body>
+</html>

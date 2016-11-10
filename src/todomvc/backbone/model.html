@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>model</title>
+    <script src="libs/jquery-3.1.0.js"></script>
+    <script src="libs/underscore.js"></script>
+    <script src="libs/backbone.js"></script>
+</head>
+<body>
+<script>
+    // Model是js应用的核心，
+    // 包括基础的数据以及围绕着这些数据的逻辑：
+    // 数据转换、验证、属性计算和访问控制
+
+    //最简单的对象
+    //    var Man = Backbone.Model.extend({
+    //        url: 'http://localhost:8001/man',
+    //        initialize: function () {
+    //            alert('hey,you create me!');
+    //            this.bind('change:name', function () {
+    //                var name = this.get('name');
+    //                alert('你改变了name属性为：' + name);
+    //            });
+    //            this.bind('invalid', function (model, error) {
+    //                alert(error);
+    //            })
+    //        },
+    //        defaults: {
+    //            name: 'ggg',
+    //            age: '18'
+    //        },
+    //        validate: function (attributes) {
+    //            if (attributes.name == '') {
+    //                return 'name不能为空';
+    //            }
+    //        },
+    //        aboutMe: function () {
+    //            return '我叫' + this.get('name') + ',今年' + this.get('age') + '岁';
+    //        }
+    //    });
+    //
+    //    var man = new Man;
+    //    man.set({name: 'ggg2', age: '16'});
+    //    //    alert(man.get('name'));
+    //    //    alert(man.aboutMe());
+    //    man.save();
+
+
+    //    man.set(({name: ''}));
+    //    //save时触发验证
+    //    man.save();
+
+    // 创建数据模型
+    var Book = Backbone.Model.extend({
+        defaults: {
+            name: "ename",
+            author: 'eauthor',
+            price: 0.01
+        },
+        // 数据验证
+        validate: function (data) {
+            if (data.price < 1) {
+                return 'prices should not be less than $1'
+            }
+        }
+    });
+
+    // 初始化数据
+    var javaBook = new Book({
+        name: 'Thinking in Java',
+        author: 'Bruce Eckel',
+    });
+
+    // 读取数据
+    console.log(javaBook.get('name'));
+    console.log(javaBook.get('author'));
+    console.log(javaBook.get('price'));
+
+    javaBook.on('change', function (model) {
+        alert('change 事件被触发');
+    });
+
+    // 事件在触发时，总是会先触发属性事件，然后再触发change事件
+    javaBook.on('change:name', function (model, value) {
+        alert('change:name 事件被触动');
+    });
+
+    javaBook.on('change:price', function (model, value) {
+//        var price = model.get('price');
+        //  Get the previous value of an attribute, recorded at the time the last
+        // `"change"` event was fired.
+        var price = model.previous('price');
+        console.log(model.previousAttributes())
+        console.log('price: ' + price + ' value:' + value);
+        if (price < value) {
+            console.log('上涨了' + (value - price));
+        } else if (price > value) {
+            console.log('下降了' + (value - price));
+        } else {
+            console.log('价格没有发生变化');
+        }
+    });
+
+    javaBook.on('invalid', function (model, error) {
+        console.log("error" + error);
+    });
+
+    // 修改数据
+    // save 方法才进行validate
+    javaBook.set({
+        name: 'Thinking in Java2',
+        author: 'Bruce Eckel2',
+        price: 0.03
+    });
+
+    console.log(javaBook.get('name'));
+    console.log(javaBook.get('author'));
+    console.log(javaBook.get('price'));
+
+    // 删除数据
+    // 从内部属性散列表中删除指定属性(attribute)。 如果未设置 silent 选项，会触发 "change" 事件。
+    javaBook.unset('name');
+    console.log(javaBook.get('name'));// undefined
+
+    // 从model中删除所有属性， 包括id属性。 如果未设置 silent 选项，会触发 "change" 事件。
+    javaBook.clear();
+    console.log(javaBook.get('name'));// undefined
+    console.log(javaBook.get('author'));// undefined
+    console.log(javaBook.get('price'));// undefined
+
+    // 同步服务器
+
+
+</script>
+</body>
+</html>
