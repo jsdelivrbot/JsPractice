@@ -4,35 +4,145 @@
     <meta charset="UTF-8">
     <title>collections</title>
     <script src="libs/jquery-3.1.0.js"></script>
-    <script src="../underscore/underscore.js"></script>
+    <script src="libs/underscore.js"></script>
     <script src="libs/backbone.js"></script>
 </head>
 <body>
 <script>
+    //    var Book = Backbone.Model.extend({
+    //        defaults: {
+    //            title: 'default'
+    //        },
+    //        initialize: function () {
+    //
+    //        }
+    //    });
+    //
+    //    var BookShelf = Backbone.Collection.extend({
+    //        model: Book
+    //    });
+    //    var book1 = new Book({title: 'book1'});
+    //    var book2 = new Book({title: 'book2'});
+    //    var book3 = new Book({title: 'book3'});
+    //
+    //    var bookShelf = new BookShelf;
+    //    bookShelf.add(book1);
+    //    bookShelf.add(book2);
+    //    bookShelf.add(book3);
+    //    bookShelf.remove(book3);
+    //
+    //    bookShelf.each(function (book) {
+    //        alert(book.get('title'));
+    //    })
+
+    // 创建集合
     var Book = Backbone.Model.extend({
         defaults: {
-            title: 'default'
-        },
-        initialize: function () {
-
+            name: ''
         }
     });
 
-    var BookShelf = Backbone.Collection.extend({
-        model: Book
+    var BookList = Backbone.Collection.extend({
+        model: Book,
+        url: 'http://localhost:8001/service'
     });
-    var book1 = new Book({title: 'book1'});
-    var book2 = new Book({title: 'book2'});
-    var book3 = new Book({title: 'book3'});
 
-    var bookShelf = new BookShelf;
-    bookShelf.add(book1);
-    bookShelf.add(book2);
-    bookShelf.add(book3);
-    bookShelf.remove(book3);
+    var book1 = new Book({
+        name: 'Effective Java'
+    });
 
-    bookShelf.each(function (book) {
-        alert(book.get('title'));
+    var book2 = new Book({
+        name: 'Java核心技术'
+    });
+
+    var book3 = new Book({
+        name: 'JavaScript语言精粹'
+    });
+
+    var books = new BookList([book1, book2, book3]);
+
+    console.log(books.models);
+
+    // 添加
+    books.add({
+        name: 'add1'
+    });
+
+    // 添加到尾部
+    books.push({
+        name: 'push1'
+    });
+
+    // 添加到头部
+    books.unshift({
+        name: 'unshift1'
+    });
+
+    console.log(books.models);
+
+    // 删除
+    books.remove(books.models[2]);
+    // 移除尾部
+    books.pop();
+    // 移除头部
+    books.shift();
+
+    console.log(books.models);
+
+    // 从服务器获取集合数据
+    books.fetch({
+        success: function (collection, resp) {
+            console.dir(collection.models);
+        }
+    });
+
+    // 创建一个新模型,并同步到服务器
+    books.create({
+        name: 'Thinking in Java',
+        price: 395.70
+    }, {
+        success: function (model, resp) {
+            console.log(books.models);
+        }
+    });
+
+    // 将数据批量同步到服务器
+    var Bok = Backbone.Model.extend({
+        defaults: {
+            name: '',
+            price: 0
+        }
+    });
+
+    var BokList = Backbone.Collection.extend({
+        model: Bok,
+        url: '/service',
+        getIds: function () {
+            return _(this.models).map(function (model) {
+                return model.id;
+            }).join(',');
+        },
+        createAll: function (options) {
+            return Backbone.sync.call(this, 'create', this, options);
+        },
+        updateAll: function (options) {
+            return Backbone.sync.call(this, 'update', this, options);
+        },
+        deleteAll: function (options) {
+            var result = Backbone.sync.call(this, 'delete', this,
+                    _.extend({
+                        url: this.url + '/' + this.getIds()
+                    }, options));
+            this.remove(this.models);
+            return result;
+        }
+    });
+
+    var boks = new BokList();
+    boks.on('reset', function () {
+        boks.createAll();
+        boks.updateAll();
+        boks.deleteAll();
     })
 
 

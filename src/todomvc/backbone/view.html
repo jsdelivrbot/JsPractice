@@ -2,9 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>view</title>
+    <title>View</title>
+    <script src="libs/jquery-3.1.0.js"></script>
+    <script src="libs/underscore.js"></script>
+    <script src="libs/backbone.js"></script>
 </head>
 <body>
+<!--<div title="列表" style="color: red" id="list" class="listview">-->
 
+<!--</div>-->
+<p id="view">
+    <input type="button" value="Create" id="create">
+    <input type="button" value="Read" id="read">
+    <input type="button" value="Update" id="update">
+    <input type="button" value="Delete" id="delete">
+</p>
+<script>
+
+    // 定义和创建视图
+    var ListView = Backbone.View.extend({
+                tagName: 'div',
+                className: 'listview',
+                id: 'list',
+                attributes: {
+                    title: '列表',
+                    style: 'color:red'
+                },
+                render: function () {
+                    this.el.innerHTML = 'Hello World!';
+                    document.body.appendChild(this.el);
+                }
+            })
+            ;
+
+    var listview = new ListView();
+    listview.render();
+
+    // 处理DOM事件
+    var MyView = Backbone.View.extend({
+        el: '#view',
+        // {"event selector": "callback"}
+        events: {
+            'click #create': 'createData',
+            'click #read': 'readData',
+            'click #update': 'updateData',
+            'click #delete': 'deleteData'
+        },
+        createData: function () {
+            alert(arguments.callee.name);
+        },
+        readData: function () {
+            alert(arguments.callee.name);
+        },
+        updateData: function () {
+            alert(arguments.callee.name);
+        },
+        deleteData: function () {
+            alert(arguments.callee.name);
+        }
+    });
+    var view = new MyView();
+
+
+</script>
 </body>
 </html>

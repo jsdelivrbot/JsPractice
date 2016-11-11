@@ -87,7 +87,7 @@
     });
 
     javaBook.on('change:price', function (model, value) {
-//        var price = model.get('price');
+        //        var price = model.get('price');
         //  Get the previous value of an attribute, recorded at the time the last
         // `"change"` event was fired.
         var price = model.previous('price');
@@ -129,8 +129,41 @@
     console.log(javaBook.get('author'));// undefined
     console.log(javaBook.get('price'));// undefined
 
+    // http://www.tuicool.com/articles/vYBR3y
     // 同步服务器
+    // 1
+    var Bok = Backbone.Model.extend({
+        urlRoot: 'http://localhost:8001/service/'
+    });
 
+    var javaBok = new Bok({
+        id: 1001,
+        name: 'Thinking in Java',
+        author: 'Bruce Eckel',
+        price: 395.70
+    });
+
+    //    javaBok.save();
+    javaBok.destroy();
+
+    // 2
+    var Bok2 = Backbone.Model.extend({
+        // urlRoot参数表示服务器接口地址的根目录，我们无法直接访问它，只能通过连接模型id来组成一个最终的接口地址
+        urlRoot: '/service',
+        // url参数表示服务器的接口地址是已知的，我们无需让Backbone自动连接模型id（这可能是在url本身已经设置了模型id，或者不需要传递模型id）
+        url: '/javaservice'
+    });
+    var javaBok2 = new Bok2({
+        id: 1001,
+        name: 'Thinking in Java',
+        author: 'Bruce Eckel',
+        price: 395.70
+    });
+
+    javaBok2.save(null, {
+        // 通过调用方法时传递的url参数优先级会高于模型定义时配置的url和urlRoot参数
+        url: '/myservice'
+    });
 
 </script>
 </body>

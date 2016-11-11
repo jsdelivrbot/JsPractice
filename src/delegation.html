@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delegation</title>
+</head>
+<body>
+<ul id="post-list">
+    <li id="post1">Item 1</li>
+    <li id="post2">Item 2</li>
+    <li id="post3">Item 3</li>
+    <li id="post4">Item 4</li>
+    <li id="post5">Item 5</li>
+    <li id="post6">Item 6</li>
+</ul>
+
+<script>
+    document.getElementById('post-list')
+            .addEventListener('click', function (e) {
+                if (e.target && e.target.nodeName == 'LI') {
+                    console.log("List item ", e.target.id.replace("post",''), " was clicked!")
+                }
+            })
+</script>
+
+</body>
+</html>
