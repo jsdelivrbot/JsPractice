@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>practice23</title>
+</head>
+<body>
+
+<script>
+    // Cookie
+    var CookieUtil = {
+        //                        15/16/17
+        //cookie: name=haoduoyu中文; language=javascript%E4%B8%AD%E6%96%87
+        get: function (name) {
+            var cookieName = encodeURIComponent(name) + '=',// cookieName = "language="  cookieName = "name="
+                    cookieStart = document.cookie.indexOf(cookieName),// cookieStart = 17  cookieStart = 0
+                    cookieValue = null;
+            if (cookieStart > -1) {
+                var cookieEnd = document.cookie.indexOf(';', cookieStart);// cookieEnd = -1  cookieEnd = 15
+                if (cookieEnd == -1) {
+                    cookieEnd = document.cookie.length;
+                }
+                cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+
+            }
+            return cookieValue;
+        },
+
+        set: function (name, value, expires, path, domain, secure) {
+            var cookieText = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+            if (expires instanceof Date) {
+                cookieText += "; expires=" + expires.toGMTString();
+            }
+            if (path) {
+                cookieText += "; path=" + path;
+            }
+            if (domain) {
+                cookieText += "; domain=" + path;
+            }
+            if (secure) {
+                cookieText += "; secure";
+            }
+            document.cookie = cookieText;
+        },
+
+        unset: function (name, path, domain, secure) {
+            this.set(name, "", new Date(0), path, domain, secure);
+        }
+    };
+
+    //    CookieUtil.set("name", "GGG");
+    document.cookie = 'name=haoduoyu中文';
+    CookieUtil.set("language", "javascript中文");
+
+    console.log(document.cookie);
+    console.log(CookieUtil.get("language"));
+    console.log(CookieUtil.get("name"));
+    // 删除 cookie
+    CookieUtil.unset("name");
+    CookieUtil.set('name2', "GGG", new Date('January 1,2010'))
+
+
+    // IndexedDB
+    var indexedDB = window.indexedDB;
+    var request, database;
+    request = indexedDB.open('admin');
+    request.onerror = function (event) {
+        alert(event.target.result)
+    };
+    request.onsuccess = function (event) {
+        database = event.target.result;
+    };
+
+    var user = {
+        username: '007',
+        password: '123456'
+    }
+
+
+</script>
+</body>
+</html>
