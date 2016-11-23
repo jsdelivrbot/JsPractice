@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨域</title>
+</head>
+<body>
+
+<!--<script>-->
+<!--window.name = "我是页面a设置的值";-->
+<!--setTimeout(function () {-->
+<!--window.location = "b.html";-->
+<!--})-->
+<!--</script>-->
+
+<script>
+    function onLoad() {
+        var iframe = document.getElementById('iframe');
+        var win = iframe.contentWindow;
+        win.postMessage("我来自页面a", "*");
+    }
+</script>
+<iframe id="iframe" src="b.html" onload="onLoad()"></iframe>
+
+</body>
+</html>
