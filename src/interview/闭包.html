@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        //面试经典问题:
+        var arr = document.getElementsByTagName("p");
+
+        function onMyLoad() {
+            /*
+             抛出问题:
+             此题的目的是想每次点击对应目标时弹出对应的数字下标 0~4,但实际是无论点击哪个目标都会弹出数字5
+             问题所在:
+
+             函数在预解释阶段，都被当成字符串存入堆内存，在真正执行时，才会被拿出来执行，
+             数组中存储的，其实只是指向这个堆内存的指针，i只是引用，i并没有传进去，执行的时候i才被传进去。
+             */
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].onclick = function () {
+                    alert(i);
+                }
+            }
+        }
+
+        function onMyLoad1() {
+            /*
+             解决思路:
+             增加若干个对应的闭包域空间(这里采用的是匿名函数),专门用来存储原先需要引用的内容(下标),不过只限于基本类型(基本类型值传递,对象类型引用传递)
+
+
+             function(arg){...}(i)中arg是函数的形参，是私有变量，是值传递
+             与外面的i没有关系，被私有作用域保护起来了，i是函数中外面的i，
+             每次触发自执行函数时，都相当于将当前循环的变量i存储了下来，
+             当arr中每一项执行时，调用了自执行函数返回的一个新地址的函数，
+             这个新地址的函数会去上级作用域去寻找i，上级作用域是形成这个新地址时的自执行函数，
+             这种保护私有变量的机制就是闭包。
+             */
+            for (var i = 0; i < arr.length; i++) {
+
+                (function (arg) {
+                    arr[i].onclick = function () {
+                        alert(arg);
+                    }
+                })(i);
+            }
+        }
+
+        function onMyLoad2() {
+            /*
+             解决思路:
+             与解决办法一有点相似但却有点不太相似.
+             相似点:同样是增加若干个对应的闭包域空间用来存储下标
+             不同点:解决办法一是在新增的匿名闭包空间内完成事件的绑定,
+             而此例是将事件绑定在新增的匿名函数返回的函数上
+
+             此时绑定的函数中的 function scope 中的 closure 对象的 引用 arg 是指向将其返回的匿名函数的私有变量 arg
+             */
+            for(var i = 0; i<arr.length;i++){
+                arr[i].onclick = (function(arg){
+                    return function () {
+                        alert(arg);
+                    }
+                })(i);
+            }
+        }
+
+        function onMyLoad3() {
+            /**
+             * 使用let关键字
+             */
+            for (let i = 0; i < arr.length; i++) {
+                arr[i].onclick = function () {
+                    alert(i);
+                }
+            }
+        }
+
+    </script>
+</head>
+<body onload="onMyLoad2()">
+<p>产品一</p>
+<p>产品二</p>
+<p>产品三</p>
+<p>产品四</p>
+<p>产品五</p>
+</body>
+</html>

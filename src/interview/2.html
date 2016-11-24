@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2</title>
+</head>
+<body>
+<script>
+    // 代码是给人看的，少用奇巧淫技
+
+    // http://www.cnblogs.com/xxcanghai/p/5189353.html#!comments
+
+    function Foo() {
+        getName = function () {
+            alert(1);
+        };
+        return this;
+    }
+    Foo.getName = function () {
+        alert(2);
+    };
+    Foo.prototype.getName = function () {
+        alert(3);
+    };
+    var getName = function () {
+        alert(4);
+    };
+    function getName() {
+        alert(5);
+    }
+
+    //请写出以下输出结果：
+    Foo.getName();//2
+    getName();//4 变量声明提升，函数表达式
+    Foo().getName();//1 Foo函数中的 getName将外层作用域的getName函数修改了，而this指向window
+    getName();//1 等于window.getName()
+    new Foo.getName();//2
+    new Foo().getName();//3
+    new new Foo().getName();//3
+
+
+
+    // http://www.cnblogs.com/xxcanghai/p/4991870.html
+    function fun(n,o) {
+        console.log(o)
+        return {
+            fun:function(m){
+                return fun(m,n);
+            }
+        };
+    }
+    var a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);//undefined,?,?,?
+    var b = fun(0).fun(1).fun(2).fun(3);//undefined,?,?,?
+    var c = fun(0).fun(1);  c.fun(2);  c.fun(3);//undefined,?,?,?
+    //问:三行a,b,c的输出分别是什么？
+</script>
+</body>
+</html>
