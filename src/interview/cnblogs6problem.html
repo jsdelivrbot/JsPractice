@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cnblogs</title>
+</head>
+<body>
+<script>
+
+    //1 显式的 return 表达式将会影响返回结果，但仅限于返回的是一个对象。
+    var fun = function () {
+        this.name = 'peter';
+
+        return {
+            name: 'jack'
+        };
+    };
+
+    var p = new fun();
+    console.log(p.name);//jack
+
+
+    //2 通过 new 关键字方式调用的函数都被认为是构造函数
+    //  如果被调用的函数没有显式的 return 表达式，则隐式的会返回 this 对象 - 也就是新创建的对象
+    var fun = function () {
+        this.name = 'peter';
+
+        return 'jack';
+    };
+
+    var p = new fun();
+    //    console.log(fun());//jack
+    //    console.log(new fun());
+    console.log(p.name);//peter
+
+
+    //3
+    var fun = function () {
+
+    };
+
+    fun.prototype = {
+        info: {
+            name: 'peter',
+            age: 25
+        }
+    };
+
+    var a = new fun();
+    var b = new fun();
+
+    a.info.name = 'jack';
+    b.info.name = 'tom';
+    console.log(a.info.name)//tom
+    console.log(b.info.name)//tom
+
+
+    //4
+    var fun = function () {
+        this.info = {
+            name: 'peter',
+            age: 25
+        }
+    }
+
+    var a = new fun();
+    var b = new fun();
+
+    a.info.name = 'jack';
+    b.info.name = 'tom';
+    console.log(a.info.name)//jack
+    console.log(b.info.name)//tom
+
+
+    //5 设置值(set)，没有涉及到属性访问(get),
+    //  设置值的时候是设置到实例上的，并没有设置到fun的原型上
+    var fun = function () {
+
+    }
+
+    fun.prototype = {
+        name: 'peter',
+        age: 25
+    }
+
+    var a = new fun();
+    var b = new fun();
+
+    a.name = 'jack';
+    b.name = 'tom';
+    console.log(a.name)//jack
+    console.log(b.name)//tom
+
+
+    //6
+    var fun = function () {
+        this.info = {
+            name: 'peter',
+            age: 25
+        }
+    }
+
+    fun.prototype = {
+        info: {
+            name: 'peter',
+            age: 25
+        }
+    }
+
+    var a = new fun();
+    var b = new fun();
+
+    a.info.name = 'jack';
+    b.info.name = 'tom';
+    console.log(a)//jack
+    console.log(b)//tom
+
+
+</script>
+</body>
+</html>

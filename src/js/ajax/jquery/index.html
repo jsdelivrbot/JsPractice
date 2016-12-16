@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.1.0.js"></script>
+    <link href="materialize.css" rel="stylesheet">
+
+</head>
+<script>
+    !function () {
+
+        var url = 'http://v2.taidii.com/api/student/8942/moments_video/?currentid=0&number=9&order=-1';
+        $.ajax({
+            url: url,
+            headers: {
+                'Authorization': 'jwt eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNoZW5qdW5AZnV6aG91IiwidXNlcl9pZCI6MjAyMywiZW1haWwiOiIiLCJleHAiOjE0ODkzODI1MzJ9.QKc3STq3qEuCOQ-40IQ18-L5yCUtgqmlol-T_NZ0T5I'
+            },
+            method: 'GET',
+            success: function (data) {
+                console.log(data.photos);
+                for (var i = 0; i <= data.photos.length; i++) {
+                    var str = '<div class="col s6 m6">\
+                        <div class="card">\
+                        <div class="card-image">\
+                        <img src="' + data.photos[i].uploaded_photos[0].thumb + '' +
+                        '">\
+                        <span class="card-title">Card Title</span>\
+                    </div>\
+                    <div class="card-content">\
+                        <p>' + data.photos[i].owner_name + '</p>\
+                    </div>\
+                    </div>\
+                    </div>'
+                    $('.row').append(str);
+                }
+            }
+        });
+    }();
+
+
+</script>
+<body>
+
+<div class="row">
+
+</div>
+
+</body>
+
+
+</html>

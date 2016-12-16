@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function unique(arr) {
+
+        return arr.filter(function (item, index, array) {
+            // indexOf()方法返回给定元素能找在数组中找到的第一个索引值
+            return array.indexOf(item) === index;
+        });
+    }
+
+    function uniqueES6(arr) {
+        return Array.from(new Set(arr));
+    }
+
+    var result = unique([1, 1, '1', '2', 1]);
+    console.log(result)
+
+    var result2 = uniqueES6([1, 1, '1', '2', 1]);
+    console.log(result2)
+</script>
+
+</body>
+</html>

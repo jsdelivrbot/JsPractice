@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var fun = function () {
+
+    };
+
+    fun.prototype = {
+        info: {
+            name: 'peter',
+            age: 25
+        }
+    };
+
+    var a = new fun();
+    var b = new fun();
+
+    a.info.name = 'jack';
+    b.info.name = 'tom';
+    //    a.info = {
+    //        name: 'a',
+    //        sex: 'male'
+    //    };
+    //    b.info = {
+    //        name: 'b',
+    //        sex: 'male'
+    //    };
+    // 当查找一个对象的属性时，JavaScript 会向上遍历原型链，直到找到给定名称的属性为止
+    // a.info 时，找到原型中的info，并修改了原型中的info
+    console.log(a.info.name)//tom
+    console.log(b.info.name)//tom
+
+    var fun = function () {
+
+    }
+
+    fun.prototype = {
+        name: 'peter',
+        age: 25
+    }
+
+    var a = new fun();
+    var b = new fun();
+
+    // 此句完成了一个 get 和 set
+    a.name = 'jack';
+    b.name = 'tom';
+    // 当给a.name赋值时，
+    // 对象的属性是无法修改其原型链中的同名属性，
+    // 而只会自身创建一个同名的属性并为其赋值
+    console.log(a.name)//jack
+    console.log(b.name)//tom
+</script>
+</body>
+</html>

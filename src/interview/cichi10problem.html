@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var length = 10;
+    function fn() {
+        console.log(this.length);
+    }
+
+    var obj = {
+        length: 5,
+        method: function (fn) {
+            fn();
+            arguments[0]();//this 指向arguments，传了两个参数
+        }
+    };
+
+    obj.method(fn, 1);
+    //10 2
+
+
+    //2
+    function fn2(a) {
+        console.log(a);
+        var a = 2;
+        // var和function是会提前声明的，而且function是优先于var声明的（如果同时存在的话），所以提前声明后输出的a是个function
+        function a() {
+        }
+
+        console.log(a);
+    }
+
+    fn2(1);
+    //function a(){} ,2
+
+    //3
+    var f = true;
+    if (f === true) {
+        var a = 10;
+    }
+
+    function fn3() {
+        var b = 20;
+        c = 30;
+    }
+
+    fn3();
+    console.log(a);//10
+    //    console.log(b);//undefined
+    console.log(c);//30
+
+    //4 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/in
+    if ('a' in window) {
+        var a = 10;
+    }
+
+    alert(a);//10
+
+    //5 给基本类型数据添加属性，不报错，但取值时是undefined
+    var a = 10;
+    a.pro = 10;
+    console.log(a.pro + a);//NaN
+
+    var s = 'hello';
+    s.pro = 'world';
+    console.log(s.pro + s);//undefinedhello
+
+    //6 函数声明优于变量声明
+    console.log(typeof fn);//function
+    function fn() {
+    }
+    var fn;
+
+    //7
+    function theMost(str) {
+        return str.split('').sort().join('').match(/(\S)\1*/g).sort(function (a, b) {
+            return b.length - a.length
+        })
+    }
+    console.log(theMost('aaafaabbccddefffffffff'));//["fffffffff", "aaaaa",d "bb", "cc", "dd", "e"]
+    console.log(theMost('aaafaabbccddefffffffff')[0][0]);
+    console.log(theMost('aaafaabbccddefffffffff')[0].length);
+    //
+    //    //7
+    //    function JSClass() {
+    //        this.m_Text = 'division element';
+    //        this.m_Element = document.createElement('div');
+    //        this.m_Element.innerHTML = this.m_Text;
+    //        this.m_Element.addEventListener('click', this.func);
+    //        // this.m_Element.onclick = this.func;
+    //    }
+    //
+    //    JSClass.prototype.Render = function() {
+    //        document.body.appendChild(this.m_Element);
+    //    }
+    //
+    //    JSClass.prototype.func = function() {
+    //        alert(this.m_Text);
+    //    };
+    //
+    //    var jc = new JSClass();
+    //    jc.Render();  // add div
+    //    jc.func();  // 输出 division element
+    //    //click添加的div元素division element会输出underfined，为什么？
+</script>
+</body>
+</html>

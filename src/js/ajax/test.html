@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 12px;
+        }
+
+        ul li:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+        ul li:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+<ul class="list">
+
+</ul>
+</body>
+
+<script>
+
+    // Get data
+    $.ajax({
+        url: 'http://192.168.1.163:8080/api/module_usage.json',
+        method: 'GET',
+        success: function (data) {
+            $.each(data.result, function (index, obj) {
+                $.each(obj, function (name, value) {
+                    $(".list").append('<li>' + name + ': ' + value + '</li>');
+                })
+            })
+        }
+    });
+
+</script>
+
+</html>

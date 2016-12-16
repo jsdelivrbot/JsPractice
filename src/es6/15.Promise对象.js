@@ -16,10 +16,10 @@
 
 // 所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。
 
-// Promise是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。
-// 它由 CommonJS社区最早提出和实现，
-// ES6将其写进了语言标准，统一了用法,原生提供了Promise对象
-
+// Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。
+// 它由 CommonJS 社区最早提出和实现，
+// ES6 将其写进了语言标准，统一了用法,原生提供了 Promise 对象
+'use strict'
 var promise = new Promise(function (resolve, reject) {
     let isSuccess;
     if (isSuccess) {
@@ -37,19 +37,18 @@ promise.then(
 
     });
 
-// very simple example
-function timeout(ms) {
-    return new Promise((resolve, reject)=> {
-        setTimeout(resolve, ms, 'done');
-    });
-}
 
-timeout(100).then((value)=> {
-    console.log(value);
-});
+new Promise((resolve, reject) => {
+    setTimeout(resolve('done'), 100);
+}).then(value =>
+    console.log(value)
+).catch(error =>
+    console.log(error)
+);
 
 
 //
+
 
 
 
