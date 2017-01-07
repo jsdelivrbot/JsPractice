@@ -1,0 +1,270 @@
+h1, h2, ul {
+    margin: 0;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+nav {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    float: right;
+}
+
+.sub-heading {
+    line-height: 30px;
+    margin: 30px 0;
+}
+
+.wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.main-wrapper {
+    background: #333333 url("img/banner.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hr {
+    width: 60%;
+    height: 2px;
+    margin: 20px auto;
+    background-color: white;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+header nav ul li, nav .logo {
+    display: inline-block;
+    line-height: 50px;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    line-height: 50px;
+    text-decoration: none;
+    display: inline-block;
+    height: inherit;
+    color: white;
+}
+
+header nav div.logo {
+    float: left;
+    padding: 0 10px;
+}
+
+header #banner {
+    height: 500px;
+}
+
+header #banner .inner {
+    max-width: 300px;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    top: 160px;
+}
+
+header #banner .inner h1 {
+    margin: 0;
+}
+
+header button {
+    border: none;
+    background: #333333;
+    color: #eeeeee;
+}
+
+header #banner button {
+    padding: 15px 30px;
+    font-size: 20px;
+    letter-spacing: 3px;
+    border-radius: 6px;
+    background: #1188AA;
+}
+
+header #banner .inner .more {
+    margin-top: 300px;
+}
+
+header .logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+header .logo a {
+    color: white;
+}
+
+.green-section {
+    text-align: center;
+    background: #809db0;
+    color: white;
+    /*padding: 100px;*/
+}
+
+.green-section .icon-group .icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-color: cadetblue;
+    transform: rotate(45deg);
+    margin: 20px;
+}
+
+.green-section .icon-group {
+    margin-top: 60px;
+}
+
+.gray-section {
+    background-color: #0088ff;
+}
+
+.gray-section .img-section {
+    width: 45%;
+}
+
+.gray-section .img-section img {
+    width: 100%;
+}
+
+.gray-section .text-section {
+    width: 55%;
+}
+
+.gray-section .article-preview > div {
+    float: left;
+    font-size: 0;
+
+}
+
+.gray-section .text-section {
+    position: relative;
+    top: 68px;
+    left: 50px;
+}
+
+.gray-section .text-section h2 {
+    margin-bottom: 20px;
+}
+
+.gray-section .text-section .sub-heading {
+    font-size: 22px;
+    margin-top: 0;
+}
+
+.gray-section .text-section p {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.gray-section .article-preview:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.purple-section {
+    padding: 80px;
+    background-color: #26c6da;
+    color: white;
+}
+
+.purple-section .heading-wrapper {
+    text-align: center;
+}
+
+.purple-section .hr {
+    background-color: white;
+    width: 60%
+}
+
+.purple-section .card {
+    padding: 50px;
+    float: left;
+    width: 50%;
+    min-height: 300px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.purple-section .card-group {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.purple-section card p {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.purple-section .card:nth-child(1) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.purple-section .card:nth-child(2) {
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+.purple-section .card:nth-child(3) {
+    background-color: rgba(0, 0, 0, 0.13);
+}
+
+.purple-section .card:nth-child(4) {
+    background-color: rgba(0, 0, 0, 0.17);
+}
+
+.purple-section .card:nth-child(5) {
+    background-color: rgba(0, 0, 0, 0.21);
+}
+
+.purple-section .card:nth-child(6) {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    height: 150px;
+    text-align: center;
+}
+
+footer ul.share-group {
+    display: block;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+footer .share-group li {
+    display: inline-block;
+    padding: 10px;
+}
+
+footer .copyright {
+    padding-bottom: 20px;
+}
+
+
+

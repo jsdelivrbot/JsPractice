@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>http://youmightnotneedjquery.com/</title>
+</head>
+<script src="../js/jquery/jquery-3.1.0.js"></script>
+<body>
+<script>
+
+
+    // 1.AJAX
+    //JSON
+
+
+    // jQuery
+    $.getJSON('/url', function (data) {
+
+    })
+
+    //IE9+
+    var request = new XMLHttpRequest();
+    request.open('GET', '/url', true);
+
+    request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+            var data = JSON.parse(request.responseText);
+        } else {
+            // server return error
+        }
+    }
+    request.onerror = function () {
+        // connection error
+    }
+    request.send();
+
+    // POST
+
+    //jQuery
+    $.ajax({
+        type: "POST",
+        url: '/url',
+        data: data
+    })
+
+    //IE8+
+    var request2 = new XMLHttpRequest();
+    request2.open('POST', '/url', true);
+    request2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    request2.send(data);
+
+
+    // Request
+
+    //jQuery
+    $.ajax({
+        type: 'GET',
+        url: '/url',
+        success: function (resp) {
+
+        },
+        error: function () {
+
+        }
+    });
+
+    //IE9+
+
+    var request3 = new XMLHttpRequest();
+    request3.open('GET', '/url', true);
+    request3.onload = function () {
+        if (request3.status >= 200 && request3.status < 400) {
+            // success
+            var resp = request3.responseText;
+        } else {
+
+        }
+    }
+
+    request3.onerror = function () {
+
+    }
+    request3.send();
+
+
+    //2.EFFECTS
+    var el = document.getElementById('el');
+    // Fade In
+    $(el).fadeIn();
+
+    function fadeIn() {
+        el.style.opacity = 0;
+        var last = +new Date();
+        var tick = function () {
+            el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+            last = +Date();
+
+            if (+el.style.opacity < 1) {
+                (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+
+            }
+        };
+        tick();
+    }
+
+    fadeIn(el);
+
+
+    // Hide
+    $(el).hide();
+
+    el.style.display = 'none';
+
+    // Show
+    $(el).show();
+    el.style.display = '';
+
+    //3.ELEMENTS
+
+    // Add Class
+    $(el).addClass(className);
+
+    if (el.classList) {
+        el.classList.add(className);
+    } else {
+        el.className += ' ' + className;
+    }
+
+    // After
+    $(el).after(htmlString);
+    el.insertAdjacentHTML('afterend', htmlString);
+
+    // Append
+    parent = document.getElementById('parent')
+    $(parent).append(el);
+
+    parent.appendChild(el);
+
+    // Before
+    $(el).before(htmlString);
+    el.insertAdjacentHTML('beforebegin', htmlString);
+
+    // Children
+    $(el).children();
+
+    el.children
+
+    // Clone
+    $(el).clone();
+
+    el.cloneNode(true);
+
+    // Contains
+    $.contains(el.child);
+
+    el !== child && el.contains(child);
+
+    // Contains Selector
+    $(el).find(selector).length;
+
+    el.querySelector(selector) !== null;
+
+    // Each
+    $(selector).each(function (e, el) {
+
+    })
+
+    var elements = document.querySelector(selector);
+    Array.prototype.forEach.call(elements, function (el, i) {
+
+    })
+
+    // Empty
+    $(el).empty();
+
+    el.innerHTML = '';
+
+    // Filter
+    $(selector).filter(filterFn);
+
+</script>
+</body>
+</html>

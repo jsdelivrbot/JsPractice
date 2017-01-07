@@ -11,7 +11,7 @@ var events = (function () {
             }
         },
         subscribe: function (topic, handler) {
-            console.log('subscribe an topic:' + topic);
+            console.log('subscribe a topic:' + topic);
             if (!topics.hasOwnProperty(topic)) {
                 topics[topic] = [];
             }

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Title</title>
+    <style type="text/css">
+        *{ /*注意*/
+            margin: 0;
+            padding:  0;
+        }
+        #foo{
+            background: red;
+        }
+        #bar{
+            margin-top: 10px; /*注意*/
+            background:  blue;
+            color: #fff;
+        }
+        #bar-hd{
+            margin-top: 20px; /*注意*/
+        }
+    </style>
+</head>
+<body>
+
+<div id="foo">
+    <h1 id="foo-hd">Sample Text</h1>
+</div>
+
+<div id="bar">
+    <h1 id="bar-hd">盒模型中规定了垂直边界重叠，这个h1有一个向上的margin值（20px），叠加到了父元素#bar上，虽然#bar本身有一个向上的margin值（10px），但重叠部分取其大者，因此#foo和#bar之间出现的是20px的空隙</h1>
+</div>
+
+<br />
+
+<p>然后来解答你这个demo中的问题，在你的代码中，首先没有做css reset，如果你把我这个demo中的：</p>
+
+<pre>
+    *{
+        margin: 0;
+        padding:  0;
+    }
+</pre>
+
+<p>去掉，你会发现，#foo上也出现了空白。浏览器默认样式中，h1等标题元素默认拥有一定的margin值，在你自己这个demo中，#header和#contentBack之间的空隙，便是由#content中的h1引起的，在chrome中，你用审查工具，一看便知！</p>
+
+<p>关于垂直边界重叠的更多信息，例如：如何避免（如你所见，添加border就是一个方法），请参考css权威指南，或者搜索，实在不能一一阐述。PS：兄弟你demo中无关的东西去掉，并保持良好的缩进啊 此为前端洁癖 ==b</p>
+
+</body>
+</html>
