@@ -1,5 +1,7 @@
 # JsPractice
 
+>本项目时间有点长，所以很混乱
+
 ## 项目下载
 
 	git clone https://github.com/bigggge/JsPractice.git

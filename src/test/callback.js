@@ -11,3 +11,4 @@ var fn = function (callback) {
 fn(function (value) {
     console.log(value);
 });
+

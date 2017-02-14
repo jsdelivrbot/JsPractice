@@ -38,7 +38,7 @@ promise.then(
     });
 
 
-new Promise((resolve, reject) => {
+var p = new Promise((resolve, reject) => {
     setTimeout(resolve('done'), 100);
 }).then(value =>
     console.log(value)
@@ -46,10 +46,18 @@ new Promise((resolve, reject) => {
     console.log(error)
 );
 
-
+console.log(p)
 //
 
 
-
+function func1(callback) {
+    callback();
+}
+function cb(c) {
+    console.log('cb' + c);
+    return false
+}
+var f = func1(cb)
+console.log(f);
 
 
