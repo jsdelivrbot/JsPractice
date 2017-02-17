@@ -6,11 +6,63 @@
 </head>
 <body>
 <script>
-    setTimeout("alert('a')", 0);
+    //    setTimeout("alert('a')", 0);
+    //
+    //    for (var i = 0; i < 10; i++) {
+    //        alert(i)
+    //    }
 
-    for (var i = 0; i < 10; i++) {
-        alert(i)
+    //    var obj = {
+    //        name: 'name',
+    //        foo: function () {
+    //            console.log(this); // Object {name: "name"}
+    //            setTimeout(function () {
+    //                console.log(this);  // Window
+    //            }, 1000);
+    //        },
+    //        foo2: function () {
+    //            console.log(this); // Object {name: "name"}
+    //            setTimeout(() => {
+    //                console.log(this);  // Object {name: "name"}
+    //            }, 2000);
+    //        }
+    //    }
+
+    var fn = function (callback) {
+        callback();
+    };
+
+    var x = {
+        fn: function (callback) {
+            console.log(this);
+            (function () {
+                console.log(this);
+            })();
+            callback()
+        }
+    };
+
+    x.fn()
+
+    var obj = {
+        name: 'name',
+        foo: function () {
+            console.log(this); // Object {name: "name"}
+            x.fn(function () {
+                console.log(this, '1');  // Window
+            });
+        },
+        foo2: function () {
+            console.log(this); // Object {name: "name"}
+            x.fn(() => {
+                console.log(this, '2');  // Object {name: "name"}
+            });
+        }
     }
+
+
+    obj.foo()
+    obj.foo2()
 
 </script>
 </body>
