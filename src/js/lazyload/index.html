@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lazyload</title>
+    <style>
+        img {
+            display: block;
+            height: 300px;
+        }
+    </style>
+
+</head>
+<body>
+<img data-src="http://farm8.staticflickr.com/7060/6969705425_0905bf6bba_o.jpg" src="blank.gif" class="lazy">
+
+<img data-src="http://farm8.staticflickr.com/7203/6969484613_0ee3af0144_o.jpg" src="blank.gif" class="lazy">
+
+<img data-src="http://farm8.staticflickr.com/7207/6821596428_cdae70e306_o.jpg" src="blank.gif" class="lazy">
+
+<script>
+    !function (window) {
+        var $q = function (q) {
+                if (document.querySelectorAll) {
+                    var res = document.querySelectorAll(q);
+                }
+                return res;
+            },
+            addEventListener = function (e, fn) {
+                window.addEventListener
+                    ? this.addEventListener(e, fn, false)
+                    : (window.attachEvent)
+                    ? this.attachEvent('on' + e, fn)
+                    : this['on' + e] = fn;
+            }
+
+        function loadImage(el) {
+            var img = new Image();
+            var src = el.getAttribute('data-src');
+            img.onload = function () {
+                if (!!el.parent)
+                    el.parent.replaceChild(img, el)
+                else
+                    el.src = src;
+            };
+
+            img.src = src;
+        }
+
+        function elementInViewport(el) {
+            var rect = el.getBoundingClientRect();
+
+            return (
+                rect.top >= 0 && rect.left >= 0 &&
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+            )
+        }
+
+        var images = [];
+        var $img = $q('img.lazy');
+        var processScroll = function () {
+            for (var i = 0; i < images.length; i++) {
+                if (elementInViewport(images[i])) {
+                    loadImage(images[i]);
+                }
+            }
+        };
+
+        // Array.prototype.slice.call is not callable under our lovely IE8
+        for (var i = 0; i < $img.length; i++) {
+            images.push($img[i]);
+//            console.log(images)
+        }
+
+        processScroll();
+        addEventListener('scroll', processScroll);
+
+    }(window)
+</script>
+</body>
+</html>

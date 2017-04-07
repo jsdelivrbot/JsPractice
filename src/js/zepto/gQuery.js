@@ -14,7 +14,8 @@
     // 它是返回一个对象，这个对象就作为这个模块的接口
     if (typeof define === 'function' && define.amd) {
         define(function () {
-            return factory(global)
+            var $ = factory(global)
+            return $
         });
     } else {
         factory(global)

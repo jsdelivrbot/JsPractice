@@ -56,8 +56,8 @@
 
              此时绑定的函数中的 function scope 中的 closure 对象的 引用 arg 是指向将其返回的匿名函数的私有变量 arg
              */
-            for(var i = 0; i<arr.length;i++){
-                arr[i].onclick = (function(arg){
+            for (var i = 0; i < arr.length; i++) {
+                arr[i].onclick = (function (arg) {
                     return function () {
                         alert(arg);
                     }

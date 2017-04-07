@@ -20,6 +20,7 @@
         return Array.prototype.concat.apply([], arr);
     }
 
+    // 多维数组
     function flatten(arr) {
         var tmp = arr;
         var result = arr;
@@ -30,9 +31,9 @@
         return result;
     }
 
-    console.log(reduceDimension([[[1, 2], [1, 2, 3]], [1, 2]]))
+//    console.log(reduceDimension([[[1, 2], [1, 2, 3]], [1, 2]]))
+//    console.log(flatten([[[1, 2], [1, 2, 3]], [1, 2]]))
     console.log(flatten([[[1, 2], [1, 2, 3]], [1, 2]]))
-    console.log(flatten2([[[1, 2], [1, 2, 3]], [1, 2]]))
 
 </script>
 </body>

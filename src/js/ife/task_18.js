@@ -69,6 +69,7 @@ window.onload = function () {
         show: function () {
             var str = "";
             result.innerHTML = '';
+            console.log(this.str)
             each(this.str, function (item) {
                 var bar = document.createElement('div');
                 bar.innerText = item;
@@ -105,7 +106,6 @@ window.onload = function () {
     function bubbleSort() {
         var clock;
         var count = 0, i = 0;
-        console.log(queue.str.length)
         clock = setInterval(function () {
             if (count > queue.str.length - 2) {
                 clearInterval(clock);
@@ -122,7 +122,7 @@ window.onload = function () {
             }
             console.log(i);
             i++;
-        }, 100);
+        }, 1000);
     }
 
     function random() {

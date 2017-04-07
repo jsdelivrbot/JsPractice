@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+    <!--如果你追求一个完全没有阻塞的CSS，那么你的唯一选项就是：在HTML中内联嵌入你的CSS-->
+    <!--减少CSS的数量-->
+    <!--Minify CSS-->
+    <link href="style.css" rel="stylesheet">
+    <!--DOMContentLoaded 2.08s Load 2.08s-->
+    <script src="a.js"></script>
+    <!--DOMContentLoaded 103ms Load 2.08s-->
+    <!--<script async src="a.js"></script>-->
+</head>
+<body>
+<div>
+    <div>
+        <p>123</p>
+    </div>
+    <div>
+        <p>123</p>
+    </div>
+    <div>
+        <p>123</p>
+    </div>
+</div>
+<!--DOMContentLoaded 2.09s Load 2.09s-->
+<!--<script src="a.js"></script>-->
+<!--DOMContentLoaded 102ms Load 2.07s-->
+<!--<script async src="a.js"></script>-->
+</body>
+</html>

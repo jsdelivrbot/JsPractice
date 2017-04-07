@@ -16,8 +16,15 @@
 <body>
 <h1 id="123" class="a123" style="font-family: 'Roboto'">sdasdsadsa</h1>
 
+<input type="file" accept="image/*;" onchange="change(this.value)"/>
 
 <script>
+
+    function change(x, y) {
+        console.log(x, y)
+        var d=document.getElementsByTagName('input')[0]
+        console.log(d.files)
+    }
 
 </script>
 </body>

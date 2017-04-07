@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>饿了么</title>
+</head>
+<body>
+
+<ul id="list" class="foo">
+
+</ul>
+
+<script>
+    var list = document.getElementById('list')
+
+    void function () {
+        var html = ''
+        for (var i = 0; i <= 550; i++) {
+            if (i === 1) {
+                html += '<li><span>#1</span></li>'
+            } else if (i === 4) {
+                html += '<li><ul><li>#4</li></ul></li>'
+            } else {
+                html += '<li>#' + i + '</li>'
+            }
+        }
+        list.innerHTML = html
+    }()
+
+    list.className += ' bar'
+
+    var li10 = document.querySelector('#list > li:nth-of-type(10)')
+    li10.parentNode.removeChild(li10)
+    li10.remove()
+
+    var li = document.createElement('LI')
+    var textNode = document.createTextNode('<v2ex.com />')
+    li.appendChild(textNode)
+
+    var li501 = document.querySelector('#list > li:nth-of-type(501)')
+    list.insertBefore(li, li501)
+
+    list.addEventListener('click', function (e) {
+        var target = e.target || e.srcElement
+
+        while (target.nodeName !== 'LI') {
+            target = target.parentNode
+        }
+
+        var children = target.parentNode.childNodes
+
+        var count = 0
+        for (var i = 0, len = children.length; i < len; i++) {
+            var node = children[i]
+            if (node.nodeName === 'LI') {
+                count++
+            }
+            if (node === target) {
+                alert('是当前第' + count + '项')
+                break
+            }
+        }
+    }, false)
+
+</script>
+</body>
+</html>

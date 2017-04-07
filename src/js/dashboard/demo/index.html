@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <script type="text/javascript" src="./jquery-3.1.0.js"></script>
+    <script src="//cdn.bootcss.com/echarts/3.2.3/echarts.common.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--加载中-->
+<!--<div class="loader">-->
+<!--<h2>loading...</h2>-->
+<!--<span></span>-->
+<!--<span></span>-->
+<!--<span></span>-->
+<!--</div>-->
+
+<div id="container">
+
+    <!--选择学校-->
+    <!--<div id="school-list-container">-->
+    <!--<select id="school-list">-->
+    <!--</select>-->
+    <!--</div>-->
+
+    <ul id="centre-list"></ul>
+
+    <!--图表-->
+    <div class="chart">
+        <h2>Student Count</h2>
+        <div id="main"></div>
+    </div>
+
+    <div class="chart">
+        <h2>New Enrollment</h2>
+        <div id="enrolled"></div>
+    </div>
+
+    <div class="chart">
+        <h2>Withdrawn</h2>
+        <div id="withdrawn"></div>
+    </div>
+
+    <div class="chart">
+        <h2>Enquiry</h2>
+        <div id="enquiry"></div>
+    </div>
+
+</div>
+
+<!--<div id="data-view" class="modal">-->
+
+<!--&lt;!&ndash;弹出层&ndash;&gt;-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<span class="close">&times;</span>-->
+<!--</div>-->
+<!--<div id="modal-body">-->
+
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+
+</body>
+<script src="./build.js"></script>
+</body>
+</html>
