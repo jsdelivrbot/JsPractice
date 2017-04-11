@@ -47,17 +47,16 @@ var p = new Promise((resolve, reject) => {
 );
 
 console.log(p)
-//
 
-
-function func1(callback) {
-    callback();
-}
-function cb(c) {
-    console.log('cb' + c);
-    return false
-}
-var f = func1(cb)
-console.log(f);
-
-
+// Promise.all
+let url = 'year=2015'
+let url2 = 'year=2016'
+let url3 = 'year=2017'
+Promise.all([url, url2, url3].map(function (u) {
+    return u + 'QQQ'
+})).then(function (results) {
+    console.log(results)
+    return results.splice(0, 2)
+}).then(function (res) {
+    console.log(res)
+})

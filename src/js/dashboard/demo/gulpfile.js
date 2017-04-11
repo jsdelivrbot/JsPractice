@@ -8,14 +8,14 @@ var babel = require('babelify');
 var uglify = require('gulp-uglify');
 
 gulp.task('build', function () {
-    var bundler = watchify(browserify('./main.js', {debug: true}).transform(babel));
+    var bundler = watchify(browserify('./main2.js', {debug: true}).transform(babel));
 
     bundler.bundle()
         .on('error', function (err) {
             console.error(err);
             this.emit('end');
         })
-        .pipe(source('build.js'))
+        .pipe(source('build2.js'))
         .pipe(buffer())
         // .pipe(uglify())
         // .pipe(sourcemaps.init({loadMaps: true}))

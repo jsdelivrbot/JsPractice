@@ -3,6 +3,8 @@
  *
  * Created by ice on 2017/4/6 上午11:13.
  */
+import "whatwg-fetch";
+var Promise = require('es6-promise').Promise;
 
 !function () {
 
@@ -60,40 +62,38 @@
     let dynamicSelected = {};
     // 请求变量
     const host = 'http://analysis.bestyiwan.com/';
-    const client = getQueryString('client') || 'GEH';
+    const client = getQueryString('client') || 'geh';
     const apiKey = getQueryString('api_key') || 'smYS9q9Hv9o7Ioek95Z7MFmuimoOsneuAMEWGtq3Uq6JYiRqyQBaOPSda3tZ06CaXznie6cdBbOI5tgpuyvxo9zEchp6sfGD3pKKkVl9gf6zkKD6CNq3WFV2IyVhAL8TVFoMsJgvKlTZAnVZz4htejJfkw4V54UVDxoTEgju3ivzpnzdl6jHcVj7ACnBatCPWDZlFXp9raEokOFFKtGZKvLhe9aG22F3MkDUhbfR2DypXhe6ZaT9hjvbL6BeDYf'
     const url = host + 'api/open/enrollment/statistics/?format=json'
         + '&client=' + client + '&api_key=' + apiKey;
     let date = new Date();
     let currentMonth = date.getMonth() + 1;
     let currentYear = date.getFullYear();
-    let startTime = +date;
-    let reqArr = [];
     let reqUrls = [];
 
     for (let j = (currentMonth !== 12 ? currentMonth + 1 : 13); j < 13; j++) {
-        reqArr.push($.get(url + `&month=${j}&year=${currentYear - 1}`))
         reqUrls.push(url + `&month=${j}&year=${currentYear - 1}`)
     }
     for (let i = 1; i <= currentMonth; i++) {
-        reqArr.push($.get(url + `&month=${i}&year=${currentYear}`))
         reqUrls.push(url + `&month=${i}&year=${currentYear}`)
     }
-    console.log('Request Array', reqArr);
 
-    $.when(...reqArr).done(function (...data) {
-        mainChart.hideLoading()
-        let filterData = [];
-        for (let i = 0; i < data.length; i++) {
-            filterData.push(data[i][0])
-        }
-        let totalData = Array.prototype.concat.apply([], filterData);
+    async function request(urls) {
+        const promises = urls.map(async url => {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data;
+        });
+        return await Promise.all(promises)
+    }
+
+    request(reqUrls).then(data => {
+        mainChart.hideLoading();
+
+        let totalData = Array.prototype.concat.apply([], data);
         console.log('totalData', totalData)
 
-        console.log('requestTime', +new Date() - startTime)
-
-        let centreData;
-        centreData = getCentresInData(totalData);
+        let centreData = getCentresInData(totalData);
         console.log('schoolList', centreData);
         // generateSchoolSelect(centreData);
         generateCentreList(centreData);
@@ -104,14 +104,13 @@
 
             // 点击全选
             if (ev.target.getAttribute('value') === 'all') {
-                $('#centre-list li:not([value="all"])').each(function () {
+                $('#centre-list').find('li:not([value="all"])').each(function () {
 
                     if ($('li[value="all"]').hasClass('checked')) {
                         $(this).removeClass('checked')
                     } else {
                         $(this).addClass('checked')
                     }
-
                 });
                 // 点击学校
             } else {
@@ -134,15 +133,13 @@
             });
 
             console.log('selectedCentres', selectedCentres)
-
             generateData(selectedCentres, totalData)
         })
-
-    }).catch(function (error) {
-        console.log(error);
-        alert('Request error')
+    }).catch(e => {
+        mainChart.hideLoading();
+        console.error(e)
+        alert(e && e.message)
     });
-
 
     function generateData(centreNamesArr, totalData) {
 
