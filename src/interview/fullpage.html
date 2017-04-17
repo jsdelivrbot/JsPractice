@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fullpage</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .full-page-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transition: all ease 1s;
+        }
+
+        .slide1 {
+            background-color: rgb(27, 188, 155);
+        }
+
+        .slide2 {
+            background-color: rgb(255, 153, 0);
+        }
+
+        .slide3 {
+            background-color: rgb(123, 170, 190);
+        }
+
+    </style>
+</head>
+<body>
+<div class="full-page-container">
+    <div class="slide slide1">
+    </div>
+    <div class="slide slide2">
+    </div>
+    <div class="slide slide3">
+    </div>
+</div>
+<script type="text/javascript">
+
+    function FullPage() {
+        this.isScrolling = false;
+        this.currentIndex = 1;
+    }
+
+    FullPage.prototype.init = function () {
+        var _this = this;
+
+        this.container = document.getElementsByClassName('full-page-container')[0];
+        var slides = _this.container.querySelectorAll('.slide');
+
+        _this.height = _this.container.clientHeight;
+        _this.slidesLength = slides.length;
+
+        slides.forEach(function (slide) {
+            slide.style.height = _this.height + 'px'
+        });
+
+        _this.container.addEventListener('mousewheel', function (event) {
+            if (_this.isScrolling) {
+                return false;
+            }
+            var e = event.originalEvent || event;
+            var deltaY = e.deltaY;
+
+            deltaY > 0 ? _this.next() : _this.pre();
+        });
+
+        _this.container.addEventListener('webkitTransitionEnd', function () {
+            _this.isScrolling = false;
+        });
+    };
+
+    FullPage.prototype.pre = function () {
+        if (this.currentIndex - 1 > 0) {
+            this.currentIndex -= 1;
+            this.move(this.currentIndex);
+        }
+    };
+
+    FullPage.prototype.next = function () {
+        if ((this.currentIndex + 1) <= this.slidesLength) {
+            this.currentIndex += 1;
+            this.move(this.currentIndex);
+        }
+    };
+
+    FullPage.prototype.move = function (index) {
+        this.isScrolling = true;
+        var distance = -(index - 1) * this.height + 'px';
+        this.container.style.transform = 'translateY(' + distance + ')';
+    };
+
+    var fullpage = new FullPage();
+    fullpage.init();
+
+</script>
+</body>
+</html>

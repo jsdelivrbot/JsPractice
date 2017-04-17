@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example</title>
+    <script>
+        function updateSize() {
+            var bytes = 0,
+                files = document.getElementById('uploadInput').files,
+                filesLength = files.length;
+
+            for (var fileId = 0; fileId < filesLength; fileId++) {
+                bytes += files[fileId].size;
+            }
+
+            var output = bytes + 'bytes';
+            var multiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"],
+                multiple = 0, approx = bytes / 1024;
+
+            // optional code for multiples approximation
+            for (; approx > 1; approx /= 1024, multiple++) {
+                output = approx.toFixed(3) + " " + multiples[multiple] + " (" + bytes + " bytes)";
+            }
+
+            // end of optional code
+            document.getElementById("fileNum").innerHTML = filesLength;
+            document.getElementById("fileSize").innerHTML = output;
+        }
+    </script>
+</head>
+<body onload="updateSize()">
+
+<form name="uploadForm">
+    <p>
+        <input id="uploadInput" type="file" name="myFiles" onchange="updateSize()" multiple>
+        selected files:
+        <span id="fileNum">0</span>;total size:
+        <span id="fileSize">0</span>
+    </p>
+    <p>
+        <input type="submit" value="Send file">
+    </p>
+</form>
+
+</body>
+</html>
