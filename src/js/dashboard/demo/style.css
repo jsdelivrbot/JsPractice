@@ -1,3 +1,20 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    background: #eee;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+}
+
+/* Chart */
+/* Chart */
+/* Chart */
+
 #main, #enquiry, #enrolled, #withdrawn {
     width: auto;
     min-height: 500px;
@@ -5,8 +22,8 @@
     height: 500px;
 }
 
-#school-list-container {
-
+h2.title {
+    display: none;
 }
 
 .chart {
@@ -20,11 +37,6 @@
     padding: 10px;
 }
 
-/* Include the padding and border in an element's total width and height */
-* {
-    box-sizing: border-box;
-}
-
 /* Remove margins and padding from the list */
 ul {
     position: fixed;
@@ -32,9 +44,10 @@ ul {
     overflow: auto;
     float: left;
     width: 190px;
-    margin: 0;
+    margin-left: 5px;
     margin-top: 10px;
     padding: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
 }
 
 /* Style the list items */
@@ -77,170 +90,109 @@ ul li.checked::before {
     width: 5px;
 }
 
-/* Style the header */
-.header {
-    background-color: #f44336;
-    padding: 30px 40px;
-    color: white;
-    text-align: center;
-}
+/* LOGIN */
+/* LOGIN */
+/* LOGIN */
 
-/* Clear floats after the header */
-.header:after {
-    content: "";
-    display: table;
-    clear: both;
-}
+/* open modal */
 
-/* Style the input */
-input {
-    border: none;
-    width: 75%;
-    padding: 10px;
-    float: left;
-    font-size: 16px;
-}
-
-/* Style the "Add" button */
-.addBtn {
-    padding: 10px;
-    width: 25%;
-    background: #d9d9d9;
-    color: #555;
-    float: left;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.addBtn:hover {
-    background-color: #bbb;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-    /*safari and chrome*/
-    select {
-        height: 38px;
-        line-height: 38px;
-        background: #f5f5f5;
-    }
-}
-
-select::-moz-focus-inner { /*Remove button padding in FF*/
-    border: 0;
-    padding: 0;
-}
-
-@-moz-document url-prefix() { /* targets Firefox only */
-    select {
-        padding: 20px 0 !important;
-    }
-}
-
-@media screen\0 {
-    /* IE Hacks: targets IE 8, 9 and 10 */
-    select {
-        height: 38px;
-        line-height: 38px;
-    }
-}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-    to {
-        top: 0;
-        opacity: 1
-    }
-}
-
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-    to {
-        top: 0;
-        opacity: 1
-    }
-}
-
-/* The Close Button */
-.close {
-    color: black;
+.openb {
     float: right;
-    font-size: 20px;
-    font-weight: bold;
+    margin: 20px;
 }
 
-.close:hover,
-.close:focus {
-    color: #a8a8a8;
-    text-decoration: none;
-    cursor: pointer;
-}
+/* Modal overlay */
 
-.modal-header {
-    padding: 2px 16px;
-}
-
-.modal-body {
-    padding: 2px 16px;
-}
-
-/*数据视图*/
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
+.login-modal-overlay {
+    z-index: 999;
+    position: fixed;
     width: 100%;
-    border: 1px solid #ddd;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
 }
 
-th, td {
+/* modal */
+.login-modal {
+    z-index: 999;
+    background: #fff;
+    max-width: 500px;
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    -webkit-box-shadow: 0 -2px 25px 0 rgba(0, 0, 0, 0.15), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    padding: 30px;
+}
+
+.login-modal h2 {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 26px;
+    color: #757575;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+    hyphens: auto;
+}
+
+.login-modal input {
+    margin: 15px 0;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    -webkit-appearance: none;
+    display: block;
+    background: transparent;
+    color: #636363;
+    width: 100%;
     border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #cdcdcd;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+.login-modal input:focus {
+    outline: none;
+}
+
+/* Button */
+.button {
+    position: relative;
+    display: inline-block;
+    padding: 0 24px;
+    height: 38px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 38px;
+    -webkit-font-smoothing: antialiased;
     text-align: center;
-    padding: 8px;
+    letter-spacing: 1px;
+    background: #387fd8;
+    border: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.15s ease;
+    -moz-transition: all 0.15s ease;
+    -ms-transition: all 0.15s ease;
+    -o-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2
+.button:focus {
+    outline: 0;
 }
 
-body {
-    /*background: #33505e;*/
+.button:hover {
+    background: #387fd8;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.27);
 }

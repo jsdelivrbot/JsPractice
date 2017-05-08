@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jszip.js"></script>
+    <script src="FileSaver.js"></script>
+    <script src="JSZipUtils.js"></script>
+</head>
+<body>
+
+<script>
+    !function () {
+        var zip = new JSZip();
+        var count = 0;
+        var suffix = '';
+        var zipFilename = "zipFilename.zip";
+        var urls = [
+            'http://7xq3d5.com1.z0.glb.clouddn.com/wall-1.jpg',
+            'http://7xq3d5.com1.z0.glb.clouddn.com/wall-2.jpg',
+            'http://7xq3d5.com1.z0.glb.clouddn.com/wall-3.jpg'
+        ];
+
+        urls.forEach(function (url) {
+            // loading a file and add it in a zip file
+            JSZipUtils.getBinaryContent(url, function (err, data) {
+                if (err) {
+                    throw err; // or handle the error
+                }
+                if (url.indexOf('png') > 0) {
+                    suffix = '.png'
+                } else if (url.indexOf('gif') > 0) {
+                    suffix = '.gif'
+                } else if (url.indexOf('jpeg') > 0) {
+                    suffix = '.jpeg'
+                } else {
+                    suffix = '.jpg'
+                }
+                zip.file(count + suffix, data, {binary: true});
+                count++;
+                if (count === urls.length) {
+                    zip.generateAsync({type: 'blob'}).then(function (content) {
+                        saveAs(content, zipFilename);
+                    });
+                }
+            });
+        });
+    }()
+
+</script>
+
+</body>
+</html>

@@ -5,13 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<form action="./a.html" method="get">
-    <input type="text" value="123">
-    <button type="submit"></button>
-</form>
-
+<a id="link" href="http://w3c.org">啊</a>
 <script>
-
+    //在新窗口, 打开页面
+    document.getElementById('link').onclick = function (ev) {
+        // 阻止浏览器默认动作 (页面跳转)
+        ev.preventDefault();
+        // 在新窗口打开页面
+//        window.open(this.href);
+    };
 </script>
 </body>
 </html>

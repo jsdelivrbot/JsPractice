@@ -6,11 +6,25 @@
 
 !function () {
 
+    // $(".login-modal-overlay").click(function () {
+    //     $(this).fadeOut(200);
+    // });
+
+    // $(".openb").click(function () {
+    // $(".login-modal-overlay").fadeIn(200);
+    // });
+
+    // $(".login-modal").click(function (event) {
+    //     event.stopPropagation();
+    // });
+
+    // Chart
     let mainChart = echarts.init(document.getElementById('main'));
     let enquiryChart = echarts.init(document.getElementById('enquiry'));
     let enrolledChart = echarts.init(document.getElementById('enrolled'));
     let withdrawnChart = echarts.init(document.getElementById('withdrawn'));
 
+    // 基础配置
     const baseOptions = {
         title: {
             text: ''
@@ -58,90 +72,99 @@
     const selectAll = 'Select All';
     let selectFlag = true;
     let dynamicSelected = {};
+
     // 请求变量
     const host = 'http://analysis.bestyiwan.com/';
-    const client = getQueryString('client') || 'GEH';
-    const apiKey = getQueryString('api_key') || 'smYS9q9Hv9o7Ioek95Z7MFmuimoOsneuAMEWGtq3Uq6JYiRqyQBaOPSda3tZ06CaXznie6cdBbOI5tgpuyvxo9zEchp6sfGD3pKKkVl9gf6zkKD6CNq3WFV2IyVhAL8TVFoMsJgvKlTZAnVZz4htejJfkw4V54UVDxoTEgju3ivzpnzdl6jHcVj7ACnBatCPWDZlFXp9raEokOFFKtGZKvLhe9aG22F3MkDUhbfR2DypXhe6ZaT9hjvbL6BeDYf'
+    // const client = getQueryString('client') || 'GEH';
+    const client = getQueryString('client');
+    // const apiKey = getQueryString('api_key') || 'smYS9q9Hv9o7Ioek95Z7MFmuimoOsneuAMEWGtq3Uq6JYiRqyQBaOPSda3tZ06CaXznie6cdBbOI5tgpuyvxo9zEchp6sfGD3pKKkVl9gf6zkKD6CNq3WFV2IyVhAL8TVFoMsJgvKlTZAnVZz4htejJfkw4V54UVDxoTEgju3ivzpnzdl6jHcVj7ACnBatCPWDZlFXp9raEokOFFKtGZKvLhe9aG22F3MkDUhbfR2DypXhe6ZaT9hjvbL6BeDYf'
+    const apiKey = getQueryString('api_key');
     const url = host + 'api/open/enrollment/statistics/?format=json'
         + '&client=' + client + '&api_key=' + apiKey;
+
+    if (!client || !apiKey) {
+        alert('Request Error: Missing client or api key')
+        mainChart.hideLoading();
+        throw new Error('Request Error: Missing client or api key');
+    }
     let date = new Date();
     let currentMonth = date.getMonth() + 1;
     let currentYear = date.getFullYear();
-    let startTime = +date;
+    // 请求API数组
     let reqArr = [];
-    let reqUrls = [];
-
     for (let j = (currentMonth !== 12 ? currentMonth + 1 : 13); j < 13; j++) {
         reqArr.push($.get(url + `&month=${j}&year=${currentYear - 1}`))
-        reqUrls.push(url + `&month=${j}&year=${currentYear - 1}`)
     }
     for (let i = 1; i <= currentMonth; i++) {
         reqArr.push($.get(url + `&month=${i}&year=${currentYear}`))
-        reqUrls.push(url + `&month=${i}&year=${currentYear}`)
     }
     console.log('Request Array', reqArr);
 
-    $.when(...reqArr).done(function (...data) {
-        mainChart.hideLoading()
-        let filterData = [];
-        for (let i = 0; i < data.length; i++) {
-            filterData.push(data[i][0])
-        }
-        let totalData = Array.prototype.concat.apply([], filterData);
-        console.log('totalData', totalData)
+    loadChart()
 
-        console.log('requestTime', +new Date() - startTime)
 
-        let centreData;
-        centreData = getCentresInData(totalData);
-        console.log('schoolList', centreData);
-        // generateSchoolSelect(centreData);
-        generateCentreList(centreData);
-        generateData('all', totalData);
+    /**
+     * 加载图表
+     */
+    function loadChart() {
+        $.when(...reqArr).done(function (...data) {
 
-        // 学校列表点击事件
-        $('#centre-list').click(function (ev) {
+            $('h2.title').css('display', 'block');
+            mainChart.hideLoading();
 
-            // 点击全选
-            if (ev.target.getAttribute('value') === 'all') {
-                $('#centre-list li:not([value="all"])').each(function () {
+            let filterData = [];
+            for (let i = 0; i < data.length; i++) {
+                filterData.push(data[i][0])
+            }
 
-                    if ($('li[value="all"]').hasClass('checked')) {
-                        $(this).removeClass('checked')
-                    } else {
-                        $(this).addClass('checked')
+            let totalData = Array.prototype.concat.apply([], filterData);
+            let centreData = getCentresInData(totalData);
+
+            generateCentreList(centreData);
+            generateData('all', totalData);
+
+            // 学校列表点击事件
+            $('#centre-list').click(function (ev) {
+
+                // 点击全选
+                if (ev.target.getAttribute('value') === 'all') {
+                    $('#centre-list li:not([value="all"])').each(function () {
+                        if ($('li[value="all"]').hasClass('checked')) {
+                            $(this).removeClass('checked')
+                        } else {
+                            $(this).addClass('checked')
+                        }
+                    });
+                    // 点击学校
+                } else {
+                    if (ev.target.tagName === 'LI') {
+                        ev.target.classList.toggle('checked');
                     }
-
-                });
-                // 点击学校
-            } else {
-                if (ev.target.tagName === 'LI') {
-                    ev.target.classList.toggle('checked');
                 }
-            }
 
-            // 处理All按钮状态
-            if (centreData.length === $('.checked:not([value="all"])').length) {
-                $('li[value="all"]').addClass('checked')
-            } else {
-                $('li[value="all"]').removeClass('checked')
-            }
+                // TODO
+                // 处理All按钮状态
+                // 排除了两个学校所以 -2
+                if ((centreData.length - 2) === $('.checked:not([value="all"])').length) {
+                    $('li[value="all"]').addClass('checked')
+                } else {
+                    $('li[value="all"]').removeClass('checked')
+                }
 
-            // 选择的学校
-            let selectedCentres = [];
-            $('.checked').each(function () {
-                selectedCentres.push(($(this).attr('value')))
-            });
+                // 选择的学校
+                let selectedCentres = [];
+                $('.checked').each(function () {
+                    selectedCentres.push(($(this).attr('value')))
+                });
 
-            console.log('selectedCentres', selectedCentres)
+                generateData(selectedCentres, totalData)
+            })
 
-            generateData(selectedCentres, totalData)
-        })
-
-    }).catch(function (error) {
-        console.log(error);
-        alert('Request error')
-    });
+        }).catch(function (error) {
+            console.log(error);
+            alert('Request error')
+        });
+    }
 
 
     function generateData(centreNamesArr, totalData) {
@@ -159,13 +182,7 @@
             filterData = getDataByCentreArray(totalData, centreNamesArr)
         }
 
-        console.log('filterData', filterData)
-        console.log('filterData length', filterData.length)
-        console.log('centreNamesArr length', centreNamesArr.length)
-
         let legendData = getLevelsInData(filterData)
-        console.log('centreName：', centreNamesArr)
-        console.log('level：', legendData)
 
         // 每个年级对应的数据之和 例: ['一年级'，10]
         let legendWithStudentCount = [], legendWithEnquiry = [], legendWithEnrolled = [], legendWithWithDrawn = [];
@@ -195,7 +212,7 @@
         let studentCountSeriesData = [], enquirySeriesData = [], enrolledSeriesData = [], withdrawnSeriesData = [];//图表4
         // 对年级循环,生成某一年级的数据
         for (let i = 0; i < legendData.length; i++) {
-            var levelName = legendData[i];
+            let levelName = legendData[i];
             // 根据level年级筛选数据
             let dataFilterByLevel = getDataByLevel(filterData, levelName);
             // console.log(levelName, dataFilterByLevel);
@@ -229,7 +246,7 @@
             // 生成X轴
             for (let j = 0; j < dataFilterByLevel.length; j++) {
                 xData.push(dataFilterByLevel[j]['Year'] + '-' + dataFilterByLevel[j]['Month']);
-                xAxisData = Array.from(new Set(xData))
+                xAxisData = unique(xData)
             }
 
             // 设置各个年级的线形图,也就是在一张图表中生成一条线
@@ -274,6 +291,12 @@
             handleSelectAll(enrolledChart, getOption(legendData, xAxisData, enrolledSeriesData))
             handleSelectAll(withdrawnChart, getOption(legendData, xAxisData, withdrawnSeriesData))
         }
+    }
+
+    function unique(arr) {
+        return arr.filter(function (item, index, array) {
+            return array.indexOf(item) === index;
+        });
     }
 
     /**
@@ -428,6 +451,7 @@
     function generateCentreList(arr) {
         let string = "<li class='checked' value='all'>All</li>";
         for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === 'EduGarden Discovery' || arr[i] === 'Joy Talent Childcare Centre Pte Ltd')continue;
             string += "<li class='checked' value=\"" + arr[i] + "\">" + arr[i] + "</li>";
         }
         $("#centre-list").html(string);
@@ -456,4 +480,20 @@
         return null;
     }
 
-}();
+    function getCookie(name) {
+        var cookieName = encodeURIComponent(name) + '=',
+            cookieStart = document.cookie.indexOf(cookieName),
+            cookieValue = null;
+        if (cookieStart > -1) {
+            var cookieEnd = document.cookie.indexOf(';', cookieStart);
+            if (cookieEnd == -1) {
+                cookieEnd = document.cookie.length;
+            }
+            cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+
+        }
+        return cookieValue;
+    }
+
+}
+();

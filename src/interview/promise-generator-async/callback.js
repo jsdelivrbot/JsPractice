@@ -46,8 +46,7 @@ function getArticle(id, callback) {
  * @param callback
  */
 function getArticleList(callback) {
-    $.ajax(
-        "http://beta.json-generator.com/api/json/get/Ey8JqwIh")
+    $.ajax("http://beta.json-generator.com/api/json/get/Ey8JqwIh")
         .done(function (result) {
             callback(result);
         });

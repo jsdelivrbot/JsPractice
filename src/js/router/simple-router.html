@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>router</title>
+</head>
+<body>
+
+<p id="content"></p>
+<ul>
+    <li><a href="#/">home</a></li>
+    <li><a href="#/blog">blog</a></li>
+    <li><a href="#/about">about</a></li>
+</ul>
+
+<script>
+
+    function Router() {
+        this.routes = {};
+        this.currentUrl = '';
+    }
+    Router.prototype.route = function (path, callback) {
+        this.routes[path] = callback || function () {};
+    };
+    Router.prototype.refresh = function () {
+        this.currentUrl = location.hash.slice(1) || '/';
+        this.routes[this.currentUrl]();
+    };
+    Router.prototype.init = function () {
+        window.addEventListener('load', this.refresh.bind(this), false);
+        window.addEventListener('hashchange', this.refresh.bind(this), false);
+    };
+
+    window.Router = new Router();
+    window.Router.init();
+
+    Router.route('/', function () {
+        document.getElementById('content').innerHTML = 'home'
+    });
+    Router.route('/blog', function () {
+        document.getElementById('content').innerHTML = 'blog'
+    });
+    Router.route('/about', function () {
+        document.getElementById('content').innerHTML = 'about'
+    });
+
+</script>
+</body>
+</html>

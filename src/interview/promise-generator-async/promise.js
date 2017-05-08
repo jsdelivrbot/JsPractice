@@ -41,8 +41,7 @@ function getArticle(id) {
 
 function getArticleList() {
     return new Promise(function (resolve, reject) {
-        $.ajax(
-            "http://beta.json-generator.com/api/json/get/Ey8JqwIh")
+        $.ajax("http://beta.json-generator.com/api/json/get/Ey8JqwIh")
             .done(function (result) {
                 resolve(result);
             });

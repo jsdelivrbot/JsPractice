@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>GGG</title>
-    <script src="https://cdn.rawgit.com/bigggge/MPlayer/master/src/MPlayer.js"></script>
+    <script src="./MPlayer.js"></script>
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/font.css" rel="stylesheet">
     <style>
         body {
-            text-align: center;
             background-color: #FFFFEA;
             background-image: url("inspiration-geometry.png");
             font-family: "Abel", sans-serif;
+        }
+
+        .main {
+            text-align: center;
             color: #FF5E5B;
         }
 
         h1 {
             font-size: 52px;
             font-family: "Lobster", cursive;
-            color: #FF5E5B;
             margin-bottom: 0;
         }
 
@@ -53,31 +57,42 @@
 
         a {
             text-decoration: none;
+            color: blue;
+        }
+
+        p {
+            font-size: 12px;
+            width: 100%;
+            text-align: center;
+            color: grey;
         }
 
     </style>
 </head>
 <body>
 <div>
-    <h1>haoduoyu.cc</h1>
+    <div class="main">
+        <h1>haoduoyu.cc</h1>
 
-    <a href="https://blog.haoduoyu.cc" target="_blank">
-        <button>博客</button>
-    </a>
+        <a href="https://blog.haoduoyu.cc" target="_blank">
+            <button>博客</button>
+        </a>
 
-    <a href="https://blog.haoduoyu.cc/resume.pdf" target="_blank">
-        <button>简历</button>
-    </a>
+        <a href="https://github.com/bigggge" target="_blank">
+            <button>Github</button>
+        </a>
+    </div>
 
-    <a href="https://github.com/bigggge" target="_blank">
-        <button>Github</button>
-    </a>
+
+    <div id="app"></div>
+
+    <p>Powered By <a href="https://github.com/bigggge/MPlayer" target="_blank">MPlayer</a></p>
 </div>
 <script>
 
     var options = {
         el: 'app',
-        autoplay: false,
+        autoplay: true,
         music: [
             {
                 title: 'Letter Song',
@@ -86,34 +101,16 @@
                 cover: 'http://pic.xiami.net/images/album/img75/87975/6615037721361503772.jpg'
             },
             {
-                title: '光るなら',
-                author: 'Goose house',
-                src: 'http://7xq3d5.com1.z0.glb.clouddn.com/Goose%20house%20-%20%E5%85%89%E3%82%8B%E3%81%AA%E3%82%89.mp3',
-                cover: 'http://p3.music.126.net/R3ndkz84v-nDZKVCBjXArw==/7834020348181215.jpg?param=130y130',
-            },
-            {
                 title: '君だったら',
                 author: 'HAPPY BIRTHDAY',
                 src: 'http://7xq3d5.com1.z0.glb.clouddn.com/HAPPY%20BIRTHDAY%20-%20%E5%90%9B%E3%81%9F%E3%82%99%E3%81%A3%E3%81%9F%E3%82%89.mp3',
                 cover: 'http://pic.xiami.net/images/album/img99/21699/216991364021699.jpg',
             },
             {
-                title: 'あの頃~ジンジンバオヂュオニー~',
-                author: 'whiteeeen',
-                src: 'http://7xq3d5.com1.z0.glb.clouddn.com/whiteeeen%20-%20%E3%81%82%E3%81%AE%E9%A0%83~%E3%82%B7%E3%82%99%E3%83%B3%E3%82%B7%E3%82%99%E3%83%B3%E3%83%8F%E3%82%99%E3%82%AA%E3%83%81%E3%82%99%E3%83%A5%E3%82%AA%E3%83%8B%E3%83%BC~.mp3',
-                cover: 'http://pic.xiami.net/images/album/img8/1726043308/21002132941444187076.jpeg',
-            },
-            {
                 title: '童话镇',
                 author: '陈一发儿',
                 src: 'http://7xq3d5.com1.z0.glb.clouddn.com/%E9%99%88%E4%B8%80%E5%8F%91%E5%84%BF%20-%20%E7%AB%A5%E8%AF%9D%E9%95%87.mp3',
                 cover: 'http://pic.xiami.net/images/album/img57/129/580987cd1634f_6451457_1477019597.png',
-            },
-            {
-                title: '成都',
-                author: '赵雷',
-                src: 'http://7xq3d5.com1.z0.glb.clouddn.com/%E8%B5%B5%E9%9B%B7%20-%20%E6%88%90%E9%83%BD.mp3',
-                cover: 'http://pic.xiami.net/images/album/img87/181/585a3226db20e_9076087_1482306086.jpg',
             }
         ],
     };
